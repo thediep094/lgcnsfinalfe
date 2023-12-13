@@ -13,6 +13,8 @@ export default {
         email: "diepnt@lgcns.com",
         role: "MEMBER",
         date: "2023-12-12",
+        avatar:
+          "https://i.pinimg.com/736x/31/af/88/31af882efb16e3f8f589ccf0afa2354a.jpg",
       },
     };
   },

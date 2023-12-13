@@ -1,18 +1,5 @@
 <template>
-  <div class="flex w-64">
-    <button
-      data-drawer-target="drawer-navigation"
-      data-drawer-show="drawer-navigation"
-      aria-controls="drawer-navigation"
-      type="button"
-      class="flex"
-    >
-      <span class="sr-only">Open sidebar</span>
-      <div class="logo px-3 py-4">
-        <icon-container iconType="logo"></icon-container>
-      </div>
-    </button>
-
+  <div>
     <aside
       id="drawer-navigation"
       class="fixed top-0 left-0 z-40 w-64 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white dark:bg-gray-800"
@@ -51,9 +38,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.logo >>> img {
-  width: 120px;
-}
-</style>
