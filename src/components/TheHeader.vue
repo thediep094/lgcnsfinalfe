@@ -15,7 +15,7 @@
       </button>
       <div class="dashboard__user flex flex-row w-full justify-between px-5">
         <div class="dashboard__user-content">
-          <p class="font-bold">Hello, {{ user.name }}</p>
+          <p class="font-bold">Hello, {{ userData?.name }}</p>
           <p>Have a nice day!</p>
         </div>
 
@@ -23,14 +23,14 @@
           <div class="dashboard__avatar">
             <img
               class="object-cover rounded-full"
-              v-if="user"
-              :src="user.avatar"
-              :alt="`${user.name}'s avatar`"
+              v-if="userData"
+              :src="userData?.avatar"
+              :alt="`${userData?.name}'s avatar`"
             />
           </div>
           <div class="dashboard__user-info ml-5">
-            <p class="font-bold text-lg uppercase">{{ user.name }}</p>
-            <p class="text-xs">{{ user.role }}</p>
+            <p class="font-bold text-lg uppercase">{{ userData?.name }}</p>
+            <p class="text-xs">{{ userData?.role }}</p>
           </div>
         </div>
       </div>
@@ -47,8 +47,8 @@ export default {
   },
   name: "DashBoardPage",
   computed: {
-    user() {
-      return this.$store.getters["user/user"];
+    userData() {
+      return this.$store.getters["user/userData"];
     },
   },
 };

@@ -85,7 +85,7 @@ export default {
 .login__image-url {
   border-radius: 29px;
   width: 100%;
-  max-height: 80vh;
+  max-height: 90vh;
   aspect-ratio: 73/84;
   object-position: right;
 }
