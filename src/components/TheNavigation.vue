@@ -12,7 +12,7 @@
           <icon-container iconType="logo"></icon-container>
         </div>
         <ul class="space-y-2 font-medium mt-10">
-          <li>
+          <li v-if="isAuthenticated">
             <router-link
               to="/dashboard"
               class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
@@ -22,7 +22,7 @@
             </router-link>
           </li>
 
-          <li>
+          <li v-if="!isAuthenticated">
             <router-link
               to="/login"
               class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
@@ -32,7 +32,7 @@
             </router-link>
           </li>
 
-          <li>
+          <li v-if="!isAuthenticated">
             <router-link
               to="/register"
               class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
@@ -55,6 +55,11 @@ export default {
   },
   components: {
     IconContainer,
+  },
+  computed: {
+    isAuthenticated() {
+      return this.$store.getters["user/isAuthenticated"];
+    },
   },
 };
 </script>

@@ -73,11 +73,20 @@ export default {
   },
 
   methods: {
-    submitLogin() {
-      this.$store.dispatch("user/login", {
-        id: Number(this.id),
-        password: this.password,
-      });
+    async submitLogin() {
+      try {
+        // Dispatch the login action
+        await this.$store.dispatch("user/login", {
+          id: Number(this.id),
+          password: this.password,
+        });
+
+        // If login is successful, navigate to the dashboard
+        this.$router.push({ name: "dashboard" });
+      } catch (error) {
+        // Handle login failure, show error messages, etc.
+        console.error("Login failed", error);
+      }
     },
   },
 };
