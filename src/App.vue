@@ -23,6 +23,6 @@ export default {
 
 <style scoped>
 .main-page {
-  background-color: #e5e5e5;
+  background-color: #fffefc;
 }
 </style>
