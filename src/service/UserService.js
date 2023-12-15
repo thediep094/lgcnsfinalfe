@@ -18,5 +18,32 @@ export default {
     }
   },
 
+  async exportData(filters) {
+    try {
+      const response = await axios.post(
+        `${API_URL}/users/exportToExcel`,
+        null,
+        {
+          params: filters,
+          responseType: "blob",
+        }
+      );
+      const blob = new Blob([response.data], {
+        type: response.headers["content-type"],
+      });
+      const link = document.createElement("a");
+      link.href = window.URL.createObjectURL(blob);
+      link.download = "exported_data.xlsx";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error("Get users failed:", error);
+      throw error.response
+        ? error.response.data
+        : { message: "Get users failed" };
+    }
+  },
+
   // Additional methods as needed
 };

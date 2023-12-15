@@ -1,5 +1,7 @@
 <template>
-  <div class="list-pagination mt-5 flex flex-row items-center justify-center">
+  <div
+    class="list-pagination mt-5 flex flex-row items-center justify-center mb-10"
+  >
     <div class="flex flex-row items-center gap-7">
       <label for="number-input" class="whitespace-nowrap"
         >Items per page:</label

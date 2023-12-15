@@ -19,4 +19,19 @@ export default {
       commit("setLoading", false); // Kết thúc loading
     }
   },
+
+  async exportData({ commit }, filters) {
+    try {
+      commit("setLoading", true); // Bắt đầu loading
+      // Thực hiện logic đăng nhập ở đây, ví dụ sử dụng API hoặc service
+      await UserService.exportData(filters);
+      return { success: true, message: "Export data successful" };
+    } catch (error) {
+      console.error("Get data failed:", error);
+      commit("setError", error);
+      return { success: false, message: "Export data failed" };
+    } finally {
+      commit("setLoading", false); // Kết thúc loading
+    }
+  },
 };
