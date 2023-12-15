@@ -5,21 +5,31 @@
         >Items per page:</label
       >
       <input
+        v-model="pageSize"
         type="number"
         id="number-input"
         aria-describedby="helper-text-explanation"
         class="input p-0 focus:border-none focus:outline-none"
         placeholder="1"
         min="1"
+        @input="handleSizeInput"
         required
       />
 
-      <span class="whitespace-nowrap">1-4 of 10</span>
+      <span class="whitespace-nowrap"
+        >{{ currentPage + 1 }} of {{ users?.totalPage }}</span
+      >
       <button class="prev flex items-center">
-        <icon-container iconType="icon-arrow-prev"></icon-container>
+        <icon-container
+          iconType="icon-arrow-prev"
+          @click="decrementPage"
+        ></icon-container>
       </button>
       <button class="next flex items-center">
-        <icon-container iconType="icon-arrow-next"></icon-container>
+        <icon-container
+          iconType="icon-arrow-next"
+          @click="incrementPage"
+        ></icon-container>
       </button>
     </div>
   </div>
@@ -29,8 +39,52 @@
 import IconContainer from "@/components/IconContainer.vue";
 
 export default {
+  props: {
+    size: {
+      type: Number,
+      required: true,
+    },
+    page: {
+      type: Number,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      pageSize: this.size,
+      currentPage: this.page,
+    };
+  },
+  watch: {
+    size(newSize) {
+      this.pageSize = newSize;
+    },
+    page(newPage) {
+      this.currentPage = newPage;
+    },
+  },
+  computed: {
+    users() {
+      return this.$store.getters["dashboard/data"];
+    },
+  },
   components: {
     IconContainer,
+  },
+  methods: {
+    handleSizeInput() {
+      this.$emit("size-change", this.pageSize);
+    },
+    decrementPage() {
+      if (this.currentPage > 0) {
+        this.currentPage -= 1;
+        this.$emit("page-change", this.currentPage);
+      }
+    },
+    incrementPage() {
+      this.currentPage += 1;
+      this.$emit("page-change", this.currentPage);
+    },
   },
 };
 </script>

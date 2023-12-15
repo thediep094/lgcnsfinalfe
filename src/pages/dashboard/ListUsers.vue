@@ -15,7 +15,7 @@
         </thead>
         <tbody>
           <tr
-            v-for="user in users"
+            v-for="user in users.users"
             :key="user.id"
             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
           >
@@ -45,7 +45,12 @@
       </table>
     </div>
   </div>
-  <list-pagination></list-pagination>
+  <list-pagination
+    :size="size"
+    :page="page"
+    @size-change="handleSizeChange"
+    @page-change="handlePageChange"
+  ></list-pagination>
 </template>
 <script>
 import IconContainer from "@/components/IconContainer.vue";
@@ -54,73 +59,40 @@ import ListPagination from "./ListPagination.vue";
 export default {
   data() {
     return {
-      users: [
-        {
-          id: 63200202,
-          name: "nguyen the diep",
-          mobilePhone: "0123456789",
-          email: "diepnt@lgcns.com",
-          role: "ADMIN",
-          date: "2023-12-12",
-          avatar:
-            "https://i.pinimg.com/736x/31/af/88/31af882efb16e3f8f589ccf0afa2354a.jpg",
-        },
-        {
-          id: 63200202,
-          name: "nguyen the diep",
-          mobilePhone: "0123456789",
-          email: "diepnt@lgcns.com",
-          role: "MEMBER",
-          date: "2023-12-12",
-          avatar:
-            "https://i.pinimg.com/736x/31/af/88/31af882efb16e3f8f589ccf0afa2354a.jpg",
-        },
-        {
-          id: 63200202,
-          name: "nguyen the diep",
-          mobilePhone: "0123456789",
-          email: "diepnt@lgcns.com",
-          role: "MEMBER",
-          date: "2023-12-12",
-          avatar:
-            "https://i.pinimg.com/736x/31/af/88/31af882efb16e3f8f589ccf0afa2354a.jpg",
-        },
-        {
-          id: 63200202,
-          name: "nguyen the diep",
-          mobilePhone: "0123456789",
-          email: "diepnt@lgcns.com",
-          role: "MEMBER",
-          date: "2023-12-12",
-          avatar:
-            "https://i.pinimg.com/736x/31/af/88/31af882efb16e3f8f589ccf0afa2354a.jpg",
-        },
-        {
-          id: 63200202,
-          name: "nguyen the diep",
-          mobilePhone: "0123456789",
-          email: "diepnt@lgcns.com",
-          role: "MEMBER",
-          date: "2023-12-12",
-          avatar:
-            "https://i.pinimg.com/736x/31/af/88/31af882efb16e3f8f589ccf0afa2354a.jpg",
-        },
-        {
-          id: 63200202,
-          name: "nguyen the diep",
-          mobilePhone: "0123456789",
-          email: "diepnt@lgcns.com",
-          role: "MEMBER",
-          date: "2023-12-12",
-          avatar:
-            "https://i.pinimg.com/736x/31/af/88/31af882efb16e3f8f589ccf0afa2354a.jpg",
-        },
-      ],
+      size: 5,
+      page: 0,
     };
+  },
+  computed: {
+    users() {
+      return this.$store.getters["dashboard/data"];
+    },
   },
   components: {
     IconContainer,
     ListPagination,
+  },
+  mounted() {
+    this.$store.dispatch("dashboard/getData", {
+      size: 5,
+      page: 0,
+    });
+  },
+  methods: {
+    handleSizeChange(newSize) {
+      this.size = newSize;
+      this.$store.dispatch("dashboard/getData", {
+        size: this.size,
+        page: this.page,
+      });
+    },
+    handlePageChange(newPage) {
+      this.page = newPage;
+      this.$store.dispatch("dashboard/getData", {
+        size: this.size,
+        page: this.page,
+      });
+    },
   },
 };
 </script>
