@@ -153,7 +153,7 @@ export default {
       try {
         if (this.password == this.confirmPassword) {
           await this.$store.dispatch("user/register", {
-            id: Number(this.id),
+            userId: Number(this.id),
             password: this.password,
             name: this.name,
             mobilePhone: this.mobilePhone,

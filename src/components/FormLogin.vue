@@ -86,7 +86,7 @@ export default {
       try {
         // Dispatch the login action
         await this.$store.dispatch("user/login", {
-          id: Number(this.id),
+          userId: Number(this.id),
           password: this.password,
         });
 
