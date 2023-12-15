@@ -34,10 +34,12 @@ export default {
   methods: {
     changeRegister() {
       this.isRegister = true;
+      this.$store.dispatch("user/clearError");
     },
 
     changeLogin() {
       this.isRegister = false;
+      this.$store.dispatch("user/clearError");
     },
   },
 };

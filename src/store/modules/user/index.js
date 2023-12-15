@@ -9,6 +9,7 @@ export default {
       isAuthenticated: false,
       userData: null, // Thêm state mới để lưu trữ dữ liệu người dùng
       loading: false,
+      error: null,
     };
   },
   mutations,

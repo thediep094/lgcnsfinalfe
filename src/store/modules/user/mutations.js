@@ -10,4 +10,8 @@ export default {
   setLoading(state, value) {
     state.loading = value;
   },
+
+  setError(state, value) {
+    state.error = value;
+  },
 };

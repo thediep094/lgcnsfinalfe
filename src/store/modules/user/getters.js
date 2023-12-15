@@ -11,4 +11,7 @@ export default {
   isAuthenticated(state) {
     return state.isAuthenticated;
   },
+  error(state) {
+    return state.error;
+  },
 };

@@ -24,7 +24,7 @@
             <img
               class="object-cover rounded-full"
               v-if="userData"
-              :src="userData?.avatar"
+              :src="avatarUrl"
               :alt="`${userData?.name}'s avatar`"
             />
           </div>
@@ -49,6 +49,9 @@ export default {
   computed: {
     userData() {
       return this.$store.getters["user/userData"];
+    },
+    avatarUrl() {
+      return "http://localhost:8081/avatar/images/" + this.userData?.avatar;
     },
   },
 };

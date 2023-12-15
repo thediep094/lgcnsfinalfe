@@ -29,6 +29,13 @@
       required
     />
   </div>
+
+  <div class="mb-6" v-if="error">
+    <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+      {{ error?.message }}
+    </p>
+  </div>
+
   <button
     @click="submitLogin"
     type="button"
@@ -70,8 +77,10 @@ export default {
     loading() {
       return this.$store.getters["user/loading"];
     },
+    error() {
+      return this.$store.getters["user/error"];
+    },
   },
-
   methods: {
     async submitLogin() {
       try {
