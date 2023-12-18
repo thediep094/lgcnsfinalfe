@@ -34,4 +34,14 @@ export default {
       commit("setLoading", false); // Kết thúc loading
     }
   },
+
+  async deleteUser({ commit }, data) {
+    try {
+      await UserService.deleteUser(data.deleteUserId, data.data);
+    } catch (error) {
+      console.error("Delete data failed:", error);
+      commit("setError", error);
+      return { success: false, message: "Delete data failed" };
+    }
+  },
 };

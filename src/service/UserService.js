@@ -75,5 +75,19 @@ export default {
     }
   },
 
+  async deleteUser(deleteUserId, data) {
+    try {
+      const response = await axios.post(
+        `${API_URL}/users/delete/${deleteUserId}`,
+        data
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Get users failed:", error);
+      throw error.response
+        ? error.response.data
+        : { message: "Get users failed" };
+    }
+  },
   // Additional methods as needed
 };

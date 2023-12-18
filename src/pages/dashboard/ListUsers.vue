@@ -74,7 +74,10 @@
                 iconType="icon-edit"
                 @click="editUser(user.userId)"
               ></icon-container>
-              <icon-container iconType="icon-delete"></icon-container>
+              <icon-container
+                iconType="icon-delete"
+                @click="deleteUser(user.userId)"
+              ></icon-container>
             </td>
           </tr>
         </tbody>
@@ -150,6 +153,16 @@ export default {
           userId: userId,
         },
       });
+    },
+    async deleteUser(userId) {
+      await this.$store.dispatch("dashboard/deleteUser", {
+        deleteUserId: userId,
+        data: {
+          userId: this.userData?.userId,
+        },
+      });
+
+      await this.$store.dispatch("dashboard/getData", this.filters);
     },
   },
 };
