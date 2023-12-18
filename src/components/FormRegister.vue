@@ -45,20 +45,40 @@
       required
     />
   </div>
-  <div class="mb-3">
-    <label
-      for="email"
-      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-      >Email address</label
-    >
-    <input
-      type="text"
-      id="email"
-      v-model="email"
-      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-      placeholder="Email"
-      required
-    />
+  <div class="mb-3 flex md:flex-row flex-col md:gap-2">
+    <div class="flex-1">
+      <label
+        for="email"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >Email address</label
+      >
+      <input
+        type="text"
+        id="email"
+        v-model="email"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        placeholder="Email@"
+        required
+      />
+    </div>
+    <div>
+      <label
+        for="domain"
+        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >Domain</label
+      >
+      <select
+        id="domain"
+        v-model="domain"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      >
+        <option>naver.com</option>
+        <option>daum.net</option>
+        <option>gmail.com</option>
+        <option>nate.com</option>
+        <option>hotmail.com</option>
+      </select>
+    </div>
   </div>
   <div class="mb-3">
     <label
@@ -137,6 +157,7 @@ export default {
       mobilePhone: "",
       name: "",
       confirmPassword: "",
+      domain: "naver.com",
     };
   },
   computed: {
@@ -157,7 +178,7 @@ export default {
             password: this.password,
             name: this.name,
             mobilePhone: this.mobilePhone,
-            email: this.email,
+            email: this.email + "@" + this.domain,
           });
           // If login is successful, navigate to the dashboard
           this.$router.push({ name: "dashboard" });

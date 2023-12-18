@@ -22,6 +22,16 @@
             </router-link>
           </li>
 
+          <li v-if="isAuthenticated">
+            <router-link
+              to="/info"
+              class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+            >
+              <icon-container iconType="icon-user"> </icon-container>
+              <span class="ms-3">Info</span>
+            </router-link>
+          </li>
+
           <li v-if="!isAuthenticated">
             <router-link
               to="/login"

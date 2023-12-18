@@ -1,4 +1,4 @@
-// services/authService.js
+// services/userService.js
 import axios from "axios";
 
 const API_URL = "http://localhost:8081";
@@ -37,6 +37,36 @@ export default {
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
+    } catch (error) {
+      console.error("Get users failed:", error);
+      throw error.response
+        ? error.response.data
+        : { message: "Get users failed" };
+    }
+  },
+
+  async updateDataUser(userId, data) {
+    try {
+      const response = await axios.put(
+        `${API_URL}/users/update/${userId}`,
+        data
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Get users failed:", error);
+      throw error.response
+        ? error.response.data
+        : { message: "Get users failed" };
+    }
+  },
+
+  async getUserData(userId, data) {
+    try {
+      const response = await axios.post(
+        `${API_URL}/users/user/${userId}`,
+        data
+      );
+      return response.data;
     } catch (error) {
       console.error("Get users failed:", error);
       throw error.response
