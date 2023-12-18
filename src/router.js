@@ -2,8 +2,9 @@ import { createRouter, createWebHistory } from "vue-router";
 import Register from "./pages/register/Register.vue";
 import Login from "./pages/login/Login.vue";
 import DashBoard from "./pages/dashboard/DashBoard.vue";
-import User from "./pages/user/User.vue";
+import InfoUser from "./pages/info/InfoUser.vue";
 import NotFound from "./pages/NotFound.vue";
+import UpdateUserVue from "./pages/updateUser/UpdateUser.vue";
 import store from "./store";
 
 const router = createRouter({
@@ -52,11 +53,27 @@ const router = createRouter({
       },
     },
     {
-      path: "/user/:id",
-      component: User,
+      path: "/info",
+      name: "infoUser",
+      component: InfoUser,
       beforeEnter: (to, from, next) => {
         const isAuthenticated = store.getters["user/isAuthenticated"];
         if (isAuthenticated) {
+          next();
+        } else {
+          next({ name: "login" });
+        }
+      },
+    },
+    {
+      path: "/user/:userId",
+      name: "updateUser",
+      component: UpdateUserVue,
+      props: true,
+      beforeEnter: (to, from, next) => {
+        const isAuthenticated = store.getters["user/isAuthenticated"];
+        const isAdmin = store.getters["user/userData"].role;
+        if (isAuthenticated && isAdmin == "ADMIN") {
           next();
         } else {
           next({ name: "login" });

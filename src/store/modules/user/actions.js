@@ -1,4 +1,5 @@
 import AuthService from "@/service/AuthService";
+import UserService from "@/service/UserService";
 
 export default {
   async login({ commit }, credentials) {
@@ -46,5 +47,36 @@ export default {
 
   clearError({ commit }) {
     commit("setError", null);
+  },
+
+  async update({ commit }, data) {
+    try {
+      commit("setLoading", true); // Bắt đầu loading
+      const response = await UserService.updateDataUser(data.userId, data.data);
+      const userData = response.data;
+      commit("setUserData", userData);
+      commit("setIsAuthenticated", true);
+      return { success: true, message: "Update successful" };
+    } catch (error) {
+      console.error("Login failed:", error);
+      commit("setError", error);
+      return { success: false, message: "Update failed" };
+    } finally {
+      commit("setLoading", false); // Kết thúc loading
+    }
+  },
+
+  async adminUpdate({ commit }, data) {
+    try {
+      commit("setLoading", true); // Bắt đầu loading
+      await UserService.updateDataUser(data.userId, data.data);
+      return { success: true, message: "Update successful" };
+    } catch (error) {
+      console.error("Login failed:", error);
+      commit("setError", error);
+      return { success: false, message: "Update failed" };
+    } finally {
+      commit("setLoading", false); // Kết thúc loading
+    }
   },
 };

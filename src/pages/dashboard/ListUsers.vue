@@ -38,13 +38,15 @@
             <th scope="col" class="px-6 py-5">Role</th>
             <th scope="col" class="px-6 py-5">Create date</th>
             <th scope="col" class="px-6 py-5">Phone</th>
-            <th scope="col" class="px-6 py-5">Action</th>
+            <th v-if="userData?.role == 'ADMIN'" scope="col" class="px-6 py-5">
+              Action
+            </th>
           </tr>
         </thead>
         <tbody>
           <tr
-            v-for="user in users.users"
-            :key="user.id"
+            v-for="user in users?.users"
+            :key="user?.userId"
             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
           >
             <td class="px-6 py-4 pl-10 flex flex-col">
@@ -64,8 +66,14 @@
             </td>
             <td class="px-6 py-4">{{ user.date }}</td>
             <td class="px-6 py-4">{{ user.mobilePhone }}</td>
-            <td class="px-6 py-4 flex flex-row gap-2">
-              <icon-container iconType="icon-edit"></icon-container>
+            <td
+              class="px-6 py-4 flex flex-row gap-2"
+              v-if="userData?.role == 'ADMIN'"
+            >
+              <icon-container
+                iconType="icon-edit"
+                @click="editUser(user.userId)"
+              ></icon-container>
               <icon-container iconType="icon-delete"></icon-container>
             </td>
           </tr>
@@ -95,6 +103,9 @@ export default {
     };
   },
   computed: {
+    userData() {
+      return this.$store.getters["user/userData"];
+    },
     users() {
       return this.$store.getters["dashboard/data"];
     },
@@ -131,6 +142,14 @@ export default {
     },
     exportData() {
       this.$store.dispatch("dashboard/exportData", this.filters);
+    },
+    editUser(userId) {
+      this.$router.push({
+        name: "updateUser",
+        params: {
+          userId: userId,
+        },
+      });
     },
   },
 };
