@@ -32,6 +32,16 @@
             </router-link>
           </li>
 
+          <li v-if="isAuthenticated">
+            <router-link
+              :to="'/change-password/' + userData?.userId"
+              class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+            >
+              <icon-container iconType="icon-user"> </icon-container>
+              <span class="ms-3">Change password</span>
+            </router-link>
+          </li>
+
           <li v-if="!isAuthenticated">
             <router-link
               to="/login"
@@ -79,6 +89,9 @@ export default {
   computed: {
     isAuthenticated() {
       return this.$store.getters["user/isAuthenticated"];
+    },
+    userData() {
+      return this.$store.getters["user/userData"];
     },
   },
   methods: {

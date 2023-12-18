@@ -89,5 +89,20 @@ export default {
         : { message: "Get users failed" };
     }
   },
+
+  async changePasswordUser(userId, passwordData) {
+    try {
+      const response = await axios.post(
+        `${API_URL}/users/change-password/${userId}`,
+        passwordData
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Change password failed:", error);
+      throw error.response
+        ? error.response.data
+        : { message: "Change password failed" };
+    }
+  },
   // Additional methods as needed
 };

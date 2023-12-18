@@ -72,9 +72,23 @@ export default {
       await UserService.updateDataUser(data.userId, data.data);
       return { success: true, message: "Update successful" };
     } catch (error) {
-      console.error("Login failed:", error);
+      console.error("Update failed:", error);
       commit("setError", error);
       return { success: false, message: "Update failed" };
+    } finally {
+      commit("setLoading", false); // Kết thúc loading
+    }
+  },
+
+  async changePassword({ commit }, data) {
+    try {
+      commit("setLoading", true); // Bắt đầu loading
+      await UserService.changePasswordUser(data.userId, data.data);
+      return { success: true, message: "Update successful" };
+    } catch (error) {
+      console.error("Change password failed:", error);
+      commit("setError", error);
+      return { success: false, message: "Change password  failed" };
     } finally {
       commit("setLoading", false); // Kết thúc loading
     }

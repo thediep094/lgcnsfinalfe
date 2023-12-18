@@ -5,6 +5,7 @@ import DashBoard from "./pages/dashboard/DashBoard.vue";
 import InfoUser from "./pages/info/InfoUser.vue";
 import NotFound from "./pages/NotFound.vue";
 import UpdateUserVue from "./pages/updateUser/UpdateUser.vue";
+import ChangePasswordVue from "./pages/info/ChangePassword.vue";
 import store from "./store";
 
 const router = createRouter({
@@ -56,6 +57,20 @@ const router = createRouter({
       path: "/info",
       name: "infoUser",
       component: InfoUser,
+      beforeEnter: (to, from, next) => {
+        const isAuthenticated = store.getters["user/isAuthenticated"];
+        if (isAuthenticated) {
+          next();
+        } else {
+          next({ name: "login" });
+        }
+      },
+    },
+    {
+      path: "/change-password/:userId",
+      name: "changePassword",
+      props: true,
+      component: ChangePasswordVue,
       beforeEnter: (to, from, next) => {
         const isAuthenticated = store.getters["user/isAuthenticated"];
         if (isAuthenticated) {
