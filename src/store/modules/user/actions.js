@@ -93,4 +93,20 @@ export default {
       commit("setLoading", false); // Kết thúc loading
     }
   },
+
+  async changeAvatar({ commit }, data) {
+    try {
+      commit("setLoading", true); // Bắt đầu loading
+      const response = await UserService.changeAvatar(data.userId, data.data);
+      const userData = response.data;
+      commit("setUserData", userData);
+      return { success: true, message: "Update successful" };
+    } catch (error) {
+      console.error("Change avatar failed:", error);
+      commit("setError", error);
+      return { success: false, message: "Change password  failed" };
+    } finally {
+      commit("setLoading", false); // Kết thúc loading
+    }
+  },
 };

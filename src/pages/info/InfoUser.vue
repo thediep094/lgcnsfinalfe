@@ -2,10 +2,33 @@
   <div>
     <div class="max-w-sm mx-auto">
       <img
-        class="rounded w-36 h-36 mb-5 mt-5 m-auto"
+        class="rounded w-36 h-36 mb-5 mt-5 m-auto object-cover"
         :src="avatarUrl"
         :alt="`${userData?.name}'s avatar`"
       />
+      <form class="max-w-lg mx-auto mb-5">
+        <label
+          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          for="user_avatar"
+          >Upload file</label
+        >
+        <input
+          class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+          aria-describedby="user_avatar_help"
+          id="user_avatar"
+          type="file"
+          ref="avatarInput"
+          @change="changeAvatar"
+          accept="image/*"
+        />
+        <div
+          class="mt-1 text-sm text-gray-500 dark:text-gray-300"
+          id="user_avatar_help"
+        >
+          A profile picture is useful to confirm your are logged into your
+          account
+        </div>
+      </form>
       <div class="mb-5">
         <label
           for="userId"
@@ -100,7 +123,16 @@
           required
         />
       </div>
-
+      <div class="mb-6" v-if="status">
+        <p class="mt-2 text-sm text-green-500 dark:text-red-500">
+          Update password successful
+        </p>
+      </div>
+      <div class="mb-6" v-if="error">
+        <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+          {{ error?.message }}
+        </p>
+      </div>
       <button
         @click="updateData"
         type="submit"
@@ -142,6 +174,7 @@ export default {
         name: "",
         domain: "",
       },
+      status: false,
     };
   },
   computed: {
@@ -178,6 +211,7 @@ export default {
     this.user.email = this.emailData;
     this.user.mobilePhone = this.mobilePhoneData;
     this.user.name = this.nameData;
+    this.avatar = this.avatarUrl;
   },
 
   methods: {
@@ -189,12 +223,36 @@ export default {
         data.name = this.user.name;
         data.role = this.roleData;
         data.userId = this.userId;
-        this.$store.dispatch("user/update", {
+        const res = await this.$store.dispatch("user/update", {
           userId: this.userId,
           data: data,
         });
+
+        if (res?.success) {
+          this.status = true;
+        } else {
+          this.status = false;
+        }
       } catch (error) {
         console.log(error);
+        this.status = false;
+      }
+    },
+
+    async changeAvatar(event) {
+      try {
+        const file = event.target.files[0];
+        if (file) {
+          const data = new FormData();
+          data.append("file", file);
+          await this.$store.dispatch("user/changeAvatar", {
+            userId: this.userId,
+            data: data,
+          });
+          this.$refs.avatarInput.value = "";
+        }
+      } catch (error) {
+        console.error("Error uploading avatar:", error);
       }
     },
   },

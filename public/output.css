@@ -1183,6 +1183,10 @@ input:checked + .toggle-bg {
   margin-top: 1.75rem;
 }
 
+.mt-1 {
+  margin-top: 0.25rem;
+}
+
 .block {
   display: block;
 }
@@ -1274,6 +1278,10 @@ input:checked + .toggle-bg {
 
 .max-w-sm {
   max-width: 24rem;
+}
+
+.max-w-lg {
+  max-width: 32rem;
 }
 
 .flex-1 {
@@ -1994,6 +2002,11 @@ body {
 :is(.dark .dark\:text-white) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+:is(.dark .dark\:text-gray-300) {
+  --tw-text-opacity: 1;
+  color: rgb(209 213 219 / var(--tw-text-opacity));
 }
 
 :is(.dark .dark\:placeholder-gray-400)::-moz-placeholder {

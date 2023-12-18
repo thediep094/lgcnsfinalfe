@@ -104,5 +104,27 @@ export default {
         : { message: "Change password failed" };
     }
   },
+
+  async changeAvatar(userId, data) {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+      const response = await axios.post(
+        `${API_URL}/avatar/change/${userId}`,
+        data,
+        config
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Change avatar failed:", error);
+      throw error.response
+        ? error.response.data
+        : { message: "Change avatar failed" };
+    }
+  },
+
   // Additional methods as needed
 };
