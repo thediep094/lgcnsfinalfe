@@ -37,7 +37,7 @@
               :to="'/change-password/' + userData?.userId"
               class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
             >
-              <icon-container iconType="icon-user"> </icon-container>
+              <icon-container iconType="icon-password"> </icon-container>
               <span class="ms-3">Change password</span>
             </router-link>
           </li>
@@ -64,7 +64,7 @@
 
           <li v-if="isAuthenticated">
             <div
-              class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+              class="cursor-pointer flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               @click="logOut"
             >
               <icon-container iconType="icon-register"> </icon-container>

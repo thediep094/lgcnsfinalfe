@@ -100,6 +100,11 @@
           required
         />
       </div>
+      <div class="mb-6" v-if="status">
+        <p class="mt-2 text-sm text-green-500 dark:text-red-500">
+          Update user successful
+        </p>
+      </div>
       <div class="mb-6" v-if="error">
         <p class="mt-2 text-sm text-red-600 dark:text-red-500">
           {{ error?.message }}
@@ -151,6 +156,7 @@ export default {
         avatar: "",
         role: "",
       },
+      status: false,
     };
   },
   computed: {
@@ -188,10 +194,16 @@ export default {
         data.name = this.user.name;
         data.role = this.user.role;
         data.userId = this.$route.params.userId;
-        this.$store.dispatch("user/adminUpdate", {
+        const res = await this.$store.dispatch("user/adminUpdate", {
           userId: this.userData.userId,
           data: data,
         });
+
+        if (res?.success) {
+          this.status = true;
+        } else {
+          this.status = false;
+        }
       } catch (error) {
         console.log(error);
       }
