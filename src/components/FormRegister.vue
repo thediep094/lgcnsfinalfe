@@ -173,6 +173,7 @@ export default {
     async submitRegister() {
       try {
         if (this.checkValidate() && this.checkPassword(this.password)) {
+          this.$store.commit("user/setError", null);
           await this.$store.dispatch("user/register", {
             userId: Number(this.id),
             password: this.password,
@@ -181,7 +182,6 @@ export default {
             email: this.email + "@" + this.domain,
           });
           // If login is successful, navigate to the dashboard and clear error
-          this.$store.commit("user/setError", null);
           this.$router.push({ name: "dashboard" });
         }
       } catch (error) {
