@@ -16,6 +16,11 @@
           required
           @input="changeFilters('userId', userId)"
         />
+        <div class="mb-6" v-if="messageId.length > 0">
+          <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+            {{ messageId }}
+          </p>
+        </div>
       </div>
       <div>
         <label
@@ -32,6 +37,11 @@
           required
           @input="changeFilters('name', name)"
         />
+        <div class="mb-6" v-if="messageName.length > 0">
+          <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+            {{ messageName }}
+          </p>
+        </div>
       </div>
       <div>
         <label
@@ -164,12 +174,24 @@ export default {
       mobilePhone: "",
       fromDate: "",
       toDate: "",
+      messageId: "",
+      messageName: "",
     };
   },
   computed: {
     loading() {
       return this.$store.getters["dashboard/loading"];
     },
+  },
+  mounted() {
+    // Calculate 1 year ago from now
+    const oneYearAgo = new Date();
+    oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+    // Set fromDate to 1 year ago
+    this.fromDate = oneYearAgo.toISOString().split("T")[0];
+    this.toDate = new Date().toISOString().split("T")[0];
+    this.changeFilters("fromDate", this.fromDate);
+    this.changeFilters("toDate", this.toDate);
   },
   components: {
     IconContainer,
@@ -179,6 +201,20 @@ export default {
       this.$emit("change-filters", key, value);
     },
     getData() {
+      const regexId = /\d{3,}/;
+      if (this.userId.length > 0 && !regexId.test(this.userId)) {
+        this.messageId = "Enter at least 3 characters to be searched";
+        return false;
+      } else {
+        this.messageId = "";
+      }
+      if (this.name.length < 2 && this.name.length > 0) {
+        this.messageName = "Enter at least 2 characters to be searched";
+        return false;
+      } else {
+        this.messageName = "";
+      }
+
       this.$emit("get-data");
     },
     exportData() {
