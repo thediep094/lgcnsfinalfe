@@ -172,7 +172,7 @@ export default {
   methods: {
     async submitRegister() {
       try {
-        if (this.password == this.confirmPassword) {
+        if (this.checkValidate() && this.checkPassword(this.password)) {
           await this.$store.dispatch("user/register", {
             userId: Number(this.id),
             password: this.password,
@@ -180,15 +180,137 @@ export default {
             mobilePhone: this.mobilePhone,
             email: this.email + "@" + this.domain,
           });
-          // If login is successful, navigate to the dashboard
+          // If login is successful, navigate to the dashboard and clear error
+          this.$store.commit("user/setError", null);
           this.$router.push({ name: "dashboard" });
-        } else {
-          alert("Password not equal confirmPassword");
         }
       } catch (error) {
         // Handle login failure, show error messages, etc.
         console.error("Login failed", error);
       }
+    },
+
+    checkValidate() {
+      const regexId = /\d{4,}/;
+      const regexName = /^[a-zA-Z ]+$/;
+      const regexPhone = /^[0-9]+$/;
+      if (!regexId.test(this.id)) {
+        this.$store.commit("user/setError", {
+          message: "ID must be at least 4 digits long.",
+        });
+        return false;
+      }
+
+      if (!regexName.test(this.name)) {
+        this.$store.commit("user/setError", {
+          message: "The name is only entered in letters.",
+        });
+        return false;
+      }
+
+      if (!regexPhone.test(this.mobilePhone)) {
+        this.$store.commit("user/setError", {
+          message: "Mobile phone number can only contain numbers.",
+        });
+        return false;
+      }
+
+      this.$store.commit("user/setError", null);
+      return true;
+    },
+
+    checkPassword() {
+      const countCombinations = this.containCount(this.password);
+      const checkSpecialCharacters = /^[a-zA-Z0-9@#$%^&*]+$/;
+      const consecutiveNumber = /.*\d{4,}.*/;
+      if (this.password.length < 8) {
+        this.$store.commit("user/setError", {
+          message:
+            "Your password not formatted correctly: Password must have at least 8 characters",
+        });
+        return false;
+      }
+
+      if (countCombinations < 2) {
+        this.$store.commit("user/setError", {
+          message:
+            "Your password not formatted correctly: Password must have at least 2 combinations: letters, numbers, or special characters",
+        });
+        return false;
+      }
+
+      if (this.password.length < 10 && countCombinations == 2) {
+        this.$store.commit("user/setError", {
+          message:
+            "Your password not formatted correctly: Password must have at least 10 characters if 2 combinations: letters, numbers, or special characters",
+        });
+        return false;
+      }
+
+      if (this.password.length < 8 && countCombinations == 3) {
+        this.$store.commit("user/setError", {
+          message:
+            "Your password not formatted correctly: Password must have at least 8 characters if 3 combinations: letters, numbers, or special characters",
+        });
+        return false;
+      }
+
+      if (!checkSpecialCharacters.test(this.password)) {
+        this.$store.commit("user/setError", {
+          message:
+            "Your password not formatted correctly: Password can only contain letters, numbers, and the special characters @#$%^&*",
+        });
+        return false;
+      }
+
+      if (consecutiveNumber.test(this.password)) {
+        this.$store.commit("user/setError", {
+          message:
+            "Your password not formatted correctly: Consecutive numbers must not be more than 3 characters",
+        });
+        return false;
+      } else {
+        for (const s of this.password) {
+          if (Number(s)) {
+            const indexOfS = this.password.indexOf(s);
+            const currentNumber = Number(s);
+            const nextNumber = Number(this.password[indexOfS + 1]) - 1;
+            const nextNextNumber = Number(this.password[indexOfS + 2]) - 2;
+            if (
+              currentNumber == nextNumber &&
+              currentNumber == nextNextNumber
+            ) {
+              this.$store.commit("user/setError", {
+                message:
+                  "Your password not formatted correctly: Consecutive numbers are not that are 1 value greater than each other",
+              });
+              return false;
+            }
+          }
+        }
+        this.$store.commit("user/setError", null);
+        return true;
+      }
+    },
+
+    containCount(password) {
+      const regexLetters = /.*[a-zA-z].*/;
+      const regexNumbers = /.*\\d.*/;
+      const regexSpecialCharacters = /.*[^a-zA-Z0-9].*/;
+      let count = 0;
+      if (regexLetters.test(password)) {
+        count += 1;
+      }
+
+      if (regexNumbers.test(password)) {
+        count += 1;
+      }
+
+      if (regexSpecialCharacters.test(password)) {
+        count += 1;
+      }
+
+      return count;
     },
   },
 };
