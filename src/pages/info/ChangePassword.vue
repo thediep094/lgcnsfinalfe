@@ -110,7 +110,7 @@ export default {
   methods: {
     async submitChangePassword() {
       this.$store.dispatch("user/clearError");
-      if (this.confirmPassword == this.newPassword) {
+      if (this.checkPassword()) {
         const res = await this.$store.dispatch("user/changePassword", {
           userId: this.$route.params.userId,
           data: {
@@ -127,6 +127,110 @@ export default {
       } else {
         this.status = false;
       }
+    },
+
+    checkPassword() {
+      const countCombinations = this.containCount(this.newPassword);
+      const checkSpecialCharacters = /^[a-zA-Z0-9@#$%^&*]+$/;
+      const consecutiveNumber = /.*\d{4,}.*/;
+
+      if (this.confirmPassword != this.newPassword) {
+        if (this.password.length < 8) {
+          this.$store.commit("user/setError", {
+            message: "Your confirm password not equal new password.",
+          });
+          return false;
+        }
+      }
+
+      if (this.newPassword.length < 8) {
+        this.$store.commit("user/setError", {
+          message:
+            "Your password not formatted correctly: Password must have at least 8 characters",
+        });
+        return false;
+      }
+
+      if (countCombinations < 2) {
+        this.$store.commit("user/setError", {
+          message:
+            "Your password not formatted correctly: Password must have at least 2 combinations: letters, numbers, or special characters",
+        });
+        return false;
+      }
+
+      if (this.newPassword.length < 10 && countCombinations == 2) {
+        this.$store.commit("user/setError", {
+          message:
+            "Your password not formatted correctly: Password must have at least 10 characters if 2 combinations: letters, numbers, or special characters",
+        });
+        return false;
+      }
+
+      if (this.newPassword.length < 8 && countCombinations == 3) {
+        this.$store.commit("user/setError", {
+          message:
+            "Your password not formatted correctly: Password must have at least 8 characters if 3 combinations: letters, numbers, or special characters",
+        });
+        return false;
+      }
+
+      if (!checkSpecialCharacters.test(this.newPassword)) {
+        this.$store.commit("user/setError", {
+          message:
+            "Your password not formatted correctly: Password can only contain letters, numbers, and the special characters @#$%^&*",
+        });
+        return false;
+      }
+
+      if (consecutiveNumber.test(this.newPassword)) {
+        this.$store.commit("user/setError", {
+          message:
+            "Your password not formatted correctly: Consecutive numbers must not be more than 3 characters",
+        });
+        return false;
+      } else {
+        for (const s of this.newPassword) {
+          if (Number(s)) {
+            const indexOfS = this.newPassword.indexOf(s);
+            const currentNumber = Number(s);
+            const nextNumber = Number(this.newPassword[indexOfS + 1]) - 1;
+            const nextNextNumber = Number(this.newPassword[indexOfS + 2]) - 2;
+            if (
+              currentNumber == nextNumber &&
+              currentNumber == nextNextNumber
+            ) {
+              this.$store.commit("user/setError", {
+                message:
+                  "Your password not formatted correctly: Consecutive numbers are not that are 1 value greater than each other",
+              });
+              return false;
+            }
+          }
+        }
+        this.$store.commit("user/setError", null);
+        return true;
+      }
+    },
+
+    containCount(password) {
+      const regexLetters = /.*[a-zA-z].*/;
+      const regexNumbers = /.*\\d.*/;
+      const regexSpecialCharacters = /.*[^a-zA-Z0-9].*/;
+      let count = 0;
+      if (regexLetters.test(password)) {
+        count += 1;
+      }
+
+      if (regexNumbers.test(password)) {
+        count += 1;
+      }
+
+      if (regexSpecialCharacters.test(password)) {
+        count += 1;
+      }
+
+      return count;
     },
   },
 };
