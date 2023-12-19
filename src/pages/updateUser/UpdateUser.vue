@@ -2,7 +2,7 @@
   <div>
     <div class="max-w-sm mx-auto">
       <img
-        class="rounded w-36 h-36 mb-5 mt-5 m-auto"
+        class="rounded w-36 h-36 mb-5 mt-5 m-auto object-cover"
         :src="user.avatar"
         :alt="`${user?.name}'s avatar`"
       />
