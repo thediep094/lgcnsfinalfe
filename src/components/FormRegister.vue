@@ -175,7 +175,7 @@ export default {
         if (this.checkValidate() && this.checkPassword(this.password)) {
           this.$store.commit("user/setError", null);
           await this.$store.dispatch("user/register", {
-            userId: Number(this.id),
+            userId: this.id,
             password: this.password,
             name: this.name,
             mobilePhone: this.mobilePhone,
