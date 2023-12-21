@@ -34,6 +34,7 @@
       <table class="w-full text-sm text-left">
         <thead class="text-xs thead">
           <tr>
+            <th scope="col" class="px-6 py-5">ID</th>
             <th scope="col" class="px-6 py-5">Name</th>
             <th scope="col" class="px-6 py-5">Role</th>
             <th scope="col" class="px-6 py-5">Create date</th>
@@ -49,6 +50,8 @@
             :key="user?.userId"
             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
           >
+            <td class="px-6 py-4">{{ user.userId }}</td>
+
             <td class="px-6 py-4 pl-10 flex flex-col">
               <p class="tb-name">{{ user.name }}</p>
               <p class="tb-email">{{ user.email }}</p>
