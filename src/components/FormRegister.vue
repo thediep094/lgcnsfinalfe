@@ -175,7 +175,7 @@ export default {
         if (this.checkValidate() && this.checkPassword(this.password)) {
           this.$store.commit("user/setError", null);
           await this.$store.dispatch("user/register", {
-            userId: this.id,
+            userId: this.id.trim(),
             password: this.password,
             name: this.name,
             mobilePhone: this.mobilePhone,
@@ -194,6 +194,8 @@ export default {
       const regexId = /\d{4,}/;
       const regexName = /^[a-zA-Z ]+$/;
       const regexPhone = /^[0-9]+$/;
+      
+
       if (!regexId.test(this.id)) {
         this.$store.commit("user/setError", {
           message: "ID must be at least 4 digits long.",
@@ -223,6 +225,15 @@ export default {
       const countCombinations = this.containCount(this.password);
       const checkSpecialCharacters = /^[a-zA-Z0-9@#$%^&*]+$/;
       const consecutiveNumber = /.*\d{4,}.*/;
+
+      if(this.password != this.confirmPassword) {
+        this.$store.commit("user/setError", {
+          message:
+            "Your password not equal your confirm password",
+        });
+        return false;
+      }
+
       if (this.password.length < 8) {
         this.$store.commit("user/setError", {
           message:
