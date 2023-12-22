@@ -71,6 +71,7 @@ export default {
     return {
       id: "",
       password: "",
+      hiddenPassword: false,
     };
   },
   computed: {

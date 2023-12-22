@@ -1,6 +1,6 @@
 <template>
   <header>
-    <div class="flex flex-row w-full justify-between">
+    <div class="flex md:flex-row flex-col w-full md:justify-between">
       <button
         data-drawer-target="drawer-navigation"
         data-drawer-show="drawer-navigation"
@@ -13,13 +13,17 @@
           <icon-container iconType="logo"></icon-container>
         </div>
       </button>
-      <div class="dashboard__user flex flex-row w-full justify-between px-5">
-        <div class="dashboard__user-content">
+      <div
+        class="dashboard__user flex md:flex-row flex-col w-full md:justify-between md:px-5"
+      >
+        <div class="dashboard__user-content md:mt-0 mt-4">
           <p class="font-bold">Hello, {{ userData?.name }}</p>
           <p>Have a nice day!</p>
         </div>
 
-        <div class="dashboard__user-actions flex flex-row items-center">
+        <div
+          class="dashboard__user-actions flex flex-row items-center md:mt-0 mt-4"
+        >
           <div class="dashboard__avatar">
             <img
               class="object-cover rounded-full"
