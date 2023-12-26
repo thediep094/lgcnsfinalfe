@@ -4,7 +4,10 @@
       <img :src="imageUrl" alt="Product Image" class="product-image" />
     </div>
     <h3 class="product-name">{{ product.product.name }}</h3>
-    <p class="product-price">{{ product.product.price }} $</p>
+    <div class="product-price">
+      <p>{{ product.product.price }} $</p>
+      <button class="product-btn">Add to cart</button>
+    </div>
   </div>
 </template>
 
@@ -67,11 +70,30 @@ export default {
 }
 
 .product-price {
-  background: #e60000;
+  background: #393939;
   color: #fff;
   padding: 8px 15px;
   border-radius: 0 0 10px 10px;
   text-decoration: none;
   font-weight: 600;
+  position: relative;
+  cursor: pointer;
+}
+
+.product-btn {
+  position: absolute;
+  right: 0;
+  padding: 0 10px;
+  top: 0;
+  bottom: 0;
+  background-color: #960705;
+  border-radius: 0 0 10px 0;
+  overflow: hidden;
+  color: #fff;
+  transition: 0.3s;
+}
+
+.product-price:hover .product-btn {
+  padding-right: 20px;
 }
 </style>
