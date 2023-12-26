@@ -37,8 +37,6 @@ export default {
   },
 
   async updateProduct({ commit }, { productId, updatedProductData }) {
-    console.log(productId);
-    console.log(updatedProductData);
     try {
       // loading
       commit("setLoading", true);

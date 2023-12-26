@@ -69,7 +69,7 @@
       </div>
       <div class="mb-6" v-if="status">
         <p class="mt-2 text-sm text-green-500 dark:text-red-500">
-          Create product successful
+          Edit product successful
         </p>
       </div>
       <div class="mb-6" v-if="error">
@@ -125,7 +125,13 @@ export default {
     };
   },
   mounted() {
+    this.$store.dispatch("productManager/clearError");
     this.getDataProduct();
+  },
+  computed: {
+    error() {
+      return this.$store.getters["productManager/error"];
+    },
   },
   methods: {
     async getDataProduct() {
@@ -151,9 +157,10 @@ export default {
         data.append("name", this.product.name);
         data.append("description", this.product.description);
         data.append("price", this.product.price);
-        console.log(this);
-        for (let i = 0; i < this.product.file?.length; i++) {
-          data.append("file", this.product.file[i]);
+        if (this.product.file?.length > 0) {
+          for (let i = 0; i < this.product.file?.length; i++) {
+            data.append("file", this.product.file[i]);
+          }
         }
         const res = await this.$store.dispatch("productManager/updateProduct", {
           productId: this.$route.params.productId,

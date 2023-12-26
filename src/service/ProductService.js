@@ -7,7 +7,6 @@ export default {
   // get product with filter by name, page, size
   async getProductsFilter(filters) {
     try {
-      console.log(filters);
       const response = await axios.post(`${API_URL}/product/all`, null, {
         params: filters,
       });
@@ -56,7 +55,6 @@ export default {
 
   //   Update product by id
   async updateProduct(productId, updatedProductData) {
-    console.log(updatedProductData);
     try {
       const response = await axios.put(
         `${API_URL}/product/update/${productId}`,

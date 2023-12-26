@@ -21,7 +21,7 @@
               <span class="ms-3">Dashboard</span>
             </router-link>
           </li>
-          <li>
+          <li v-if="isAuthenticated && userData.role == 'ADMIN'">
             <router-link
               to="/product-manager"
               class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
@@ -35,16 +35,16 @@
               to="/products"
               class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
             >
-              <icon-container iconType="dashboard"> </icon-container>
+              <icon-container iconType="icon-list"> </icon-container>
               <span class="ms-3">Products</span>
             </router-link>
           </li>
-          <li>
+          <li v-if="isAuthenticated && userData.role == 'ADMIN'">
             <router-link
               to="/product-create"
               class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
             >
-              <icon-container iconType="dashboard"> </icon-container>
+              <icon-container iconType="icon-create"> </icon-container>
               <span class="ms-3">Create product</span>
             </router-link>
           </li>
