@@ -58,7 +58,7 @@ export default {
   data() {
     return {
       filters: {
-        size: 10,
+        size: 8,
         page: 0,
         name: "",
       },

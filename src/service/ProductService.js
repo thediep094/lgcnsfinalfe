@@ -24,7 +24,12 @@ export default {
     try {
       const response = await axios.post(
         `${API_URL}/product/create`,
-        productData
+        productData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
       return response.data;
     } catch (error) {

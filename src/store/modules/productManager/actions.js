@@ -20,12 +20,12 @@ export default {
       commit("setLoading", false); // End loading
     }
   },
-  async deleteProduct({ commit }, productId) {
+  async deleteProduct({ commit }, data) {
     try {
       // loading
       commit("setLoading", true);
       // Delete product
-      await ProductService.deleteProduct(productId);
+      await ProductService.deleteProduct(data.productId);
       return { success: true, message: "Delete product successful" };
     } catch (error) {
       console.error("Delete product failed:", error);
@@ -52,12 +52,15 @@ export default {
     }
   },
 
+  clearError({ commit }) {
+    commit("setError", null);
+  },
   async createProduct({ commit }, productData) {
     try {
       // loading
       commit("setLoading", true);
       // Create product
-      await ProductService.createProduct(productData);
+      await ProductService.createProduct(productData.data);
       return { success: true, message: "Create product successful" };
     } catch (error) {
       console.error("Create product failed:", error);

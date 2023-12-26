@@ -80,7 +80,7 @@ export default {
       }
     },
     incrementPage() {
-      if (this.products.length < this.pageSize) {
+      if (this.products.length + 1 < this.pageSize) {
         alert("No more page!!");
       } else {
         this.currentPage += 1;

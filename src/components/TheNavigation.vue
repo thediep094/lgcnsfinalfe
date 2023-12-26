@@ -23,6 +23,15 @@
           </li>
           <li>
             <router-link
+              to="/product-manager"
+              class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+            >
+              <icon-container iconType="dashboard"> </icon-container>
+              <span class="ms-3">Product Manager</span>
+            </router-link>
+          </li>
+          <li>
+            <router-link
               to="/products"
               class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
             >
@@ -30,7 +39,15 @@
               <span class="ms-3">Products</span>
             </router-link>
           </li>
-
+          <li>
+            <router-link
+              to="/product-create"
+              class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+            >
+              <icon-container iconType="dashboard"> </icon-container>
+              <span class="ms-3">Create product</span>
+            </router-link>
+          </li>
           <li v-if="isAuthenticated">
             <router-link
               to="/info"

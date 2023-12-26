@@ -125,7 +125,7 @@
       </div>
       <div class="mb-6" v-if="status">
         <p class="mt-2 text-sm text-green-500 dark:text-red-500">
-          Update password successful
+          Update user successful
         </p>
       </div>
       <div class="mb-6" v-if="error">

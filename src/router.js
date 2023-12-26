@@ -8,7 +8,9 @@ import UpdateUserVue from "./pages/updateUser/UpdateUser.vue";
 import ChangePasswordVue from "./pages/info/ChangePassword.vue";
 import store from "./store";
 import ProductListVue from "./pages/productList/ProductList.vue";
-
+import ProductManager from "./pages/productManager/ProductManager.vue";
+import CreateProductVue from "./pages/createProduct/CreateProduct.vue";
+import EditProductVue from "./pages/editProduct/EditProduct.vue";
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -54,6 +56,57 @@ const router = createRouter({
           } else {
             next({ name: "productsList" });
           }
+        } else {
+          next({ name: "login" });
+        }
+      },
+    },
+    {
+      path: "/product-manager",
+      name: "productManager",
+      component: ProductManager,
+      beforeEnter: (to, from, next) => {
+        const isAuthenticated = store.getters["user/isAuthenticated"];
+        const isAdmin = store.getters["user/userData"].role;
+        if (isAuthenticated) {
+          if (isAdmin == "ADMIN") {
+            next();
+          } else {
+            next({ name: "productsList" });
+          }
+        } else {
+          next({ name: "login" });
+        }
+      },
+    },
+    {
+      path: "/product-create",
+      name: "createProduct",
+      component: CreateProductVue,
+      beforeEnter: (to, from, next) => {
+        const isAuthenticated = store.getters["user/isAuthenticated"];
+        const isAdmin = store.getters["user/userData"].role;
+        if (isAuthenticated) {
+          if (isAdmin == "ADMIN") {
+            next();
+          } else {
+            next({ name: "productsList" });
+          }
+        } else {
+          next({ name: "login" });
+        }
+      },
+    },
+    {
+      path: "/product/:productId",
+      name: "editProduct",
+      component: EditProductVue,
+      props: true,
+      beforeEnter: (to, from, next) => {
+        const isAuthenticated = store.getters["user/isAuthenticated"];
+        const isAdmin = store.getters["user/userData"].role;
+        if (isAuthenticated && isAdmin == "ADMIN") {
+          next();
         } else {
           next({ name: "login" });
         }
