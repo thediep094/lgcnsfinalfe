@@ -1037,6 +1037,18 @@ input:checked + .toggle-bg {
   }
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
 .pointer-events-none {
   pointer-events: none;
 }
@@ -1102,8 +1114,20 @@ input:checked + .toggle-bg {
   top: 0px;
 }
 
-.right-2 {
-  right: 0.5rem;
+.bottom-2 {
+  bottom: 0.5rem;
+}
+
+.bottom-2\.5 {
+  bottom: 0.625rem;
+}
+
+.end-2 {
+  inset-inline-end: 0.5rem;
+}
+
+.end-2\.5 {
+  inset-inline-end: 0.625rem;
 }
 
 .z-10 {
@@ -1183,16 +1207,16 @@ input:checked + .toggle-bg {
   margin-top: 0.5rem;
 }
 
+.mt-4 {
+  margin-top: 1rem;
+}
+
 .mt-5 {
   margin-top: 1.25rem;
 }
 
 .mt-7 {
   margin-top: 1.75rem;
-}
-
-.mt-4 {
-  margin-top: 1rem;
 }
 
 .block {
@@ -1382,6 +1406,10 @@ input:checked + .toggle-bg {
 
 .flex-col {
   flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
 }
 
 .items-start {
@@ -1654,6 +1682,11 @@ input:checked + .toggle-bg {
 .py-5 {
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
+}
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .pl-10 {
@@ -2095,14 +2128,6 @@ body {
 }
 
 @media (min-width: 768px) {
-  .md\:mt-4 {
-    margin-top: 1rem;
-  }
-
-  .md\:mt-2 {
-    margin-top: 0.5rem;
-  }
-
   .md\:mt-0 {
     margin-top: 0px;
   }

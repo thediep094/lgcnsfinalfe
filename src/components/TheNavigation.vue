@@ -12,13 +12,22 @@
           <icon-container iconType="logo"></icon-container>
         </div>
         <ul class="space-y-2 font-medium mt-10">
-          <li v-if="isAuthenticated">
+          <li v-if="isAuthenticated && userData.role == 'ADMIN'">
             <router-link
               to="/dashboard"
               class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
             >
               <icon-container iconType="dashboard"> </icon-container>
               <span class="ms-3">Dashboard</span>
+            </router-link>
+          </li>
+          <li>
+            <router-link
+              to="/products"
+              class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+            >
+              <icon-container iconType="dashboard"> </icon-container>
+              <span class="ms-3">Products</span>
             </router-link>
           </li>
 

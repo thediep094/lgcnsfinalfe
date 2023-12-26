@@ -4,10 +4,10 @@ import UserService from "@/service/UserService";
 export default {
   async login({ commit }, credentials) {
     try {
-      commit("setLoading", true); // Bắt đầu loading
-      // Thực hiện logic đăng nhập ở đây, ví dụ sử dụng API hoặc service
+      commit("setLoading", true); // Start loading
+      // Implement login logic here, for example using an API or service
       const response = await AuthService.login(credentials);
-      // Nếu đăng nhập thành công, lưu thông tin người dùng vào state userData
+      // If logged in successfully, save user information into state userData
       const userData = response.data;
       commit("setUserData", userData);
       commit("setIsAuthenticated", true);
@@ -18,7 +18,7 @@ export default {
       commit("setError", error);
       return { success: false, message: "Login failed" };
     } finally {
-      commit("setLoading", false); // Kết thúc loading
+      commit("setLoading", false); // Finish loading
     }
   },
 
@@ -30,7 +30,7 @@ export default {
 
   async register({ commit }, user) {
     try {
-      commit("setLoading", true); // Bắt đầu loading
+      commit("setLoading", true); // Start loading
       const response = await AuthService.register(user);
       const userData = response.data;
       commit("setUserData", userData);
@@ -41,7 +41,7 @@ export default {
       commit("setError", error);
       return { success: false, message: "Register failed" };
     } finally {
-      commit("setLoading", false); // Kết thúc loading
+      commit("setLoading", false); // Finish loading
     }
   },
 
@@ -51,7 +51,7 @@ export default {
 
   async update({ commit }, data) {
     try {
-      commit("setLoading", true); // Bắt đầu loading
+      commit("setLoading", true); // Start loading
       const response = await UserService.updateDataUser(data.userId, data.data);
       const userData = response.data;
       commit("setUserData", userData);
@@ -62,13 +62,13 @@ export default {
       commit("setError", error);
       return { success: false, message: "Update failed" };
     } finally {
-      commit("setLoading", false); // Kết thúc loading
+      commit("setLoading", false); //  Finish loading
     }
   },
 
   async adminUpdate({ commit }, data) {
     try {
-      commit("setLoading", true); // Bắt đầu loading
+      commit("setLoading", true); // Start loading
       await UserService.updateDataUser(data.userId, data.data);
       return { success: true, message: "Update successful" };
     } catch (error) {
@@ -76,13 +76,13 @@ export default {
       commit("setError", error);
       return { success: false, message: "Update failed" };
     } finally {
-      commit("setLoading", false); // Kết thúc loading
+      commit("setLoading", false); //  Finish loading
     }
   },
 
   async changePassword({ commit }, data) {
     try {
-      commit("setLoading", true); // Bắt đầu loading
+      commit("setLoading", true); // Start loading
       await UserService.changePasswordUser(data.userId, data.data);
       return { success: true, message: "Update successful" };
     } catch (error) {
@@ -90,13 +90,13 @@ export default {
       commit("setError", error);
       return { success: false, message: "Change password  failed" };
     } finally {
-      commit("setLoading", false); // Kết thúc loading
+      commit("setLoading", false); // Finish loading
     }
   },
 
   async changeAvatar({ commit }, data) {
     try {
-      commit("setLoading", true); // Bắt đầu loading
+      commit("setLoading", true); // Start loading
       const response = await UserService.changeAvatar(data.userId, data.data);
       const userData = response.data;
       commit("setUserData", userData);
@@ -106,7 +106,7 @@ export default {
       commit("setError", error);
       return { success: false, message: "Change password  failed" };
     } finally {
-      commit("setLoading", false); // Kết thúc loading
+      commit("setLoading", false); // Finish loading
     }
   },
 };

@@ -3,10 +3,10 @@ import UserService from "@/service/UserService";
 export default {
   async getData({ commit }, filters) {
     try {
-      commit("setLoading", true); // Bắt đầu loading
-      // Thực hiện logic đăng nhập ở đây, ví dụ sử dụng API hoặc service
+      commit("setLoading", true); // Start loading
+      // Implement the login logic here
       const response = await UserService.getUsersFilter(filters);
-      // Nếu đăng nhập thành công, lưu thông tin người dùng vào state userData
+      // If logged in successfully, save user information into state userData
       const userData = response.data;
       commit("setData", userData);
 
@@ -16,14 +16,14 @@ export default {
       commit("setError", error);
       return { success: false, message: "Get data failed" };
     } finally {
-      commit("setLoading", false); // Kết thúc loading
+      commit("setLoading", false); // Finish loading
     }
   },
 
   async exportData({ commit }, filters) {
     try {
-      commit("setLoading", true); // Bắt đầu loading
-      // Thực hiện logic đăng nhập ở đây, ví dụ sử dụng API hoặc service
+      commit("setLoading", true); // Start loading
+      // Implement the login logic here
       await UserService.exportData(filters);
       return { success: true, message: "Export data successful" };
     } catch (error) {
@@ -31,7 +31,7 @@ export default {
       commit("setError", error);
       return { success: false, message: "Export data failed" };
     } finally {
-      commit("setLoading", false); // Kết thúc loading
+      commit("setLoading", false); // Finish loading
     }
   },
 
@@ -41,7 +41,7 @@ export default {
     } catch (error) {
       console.error("Delete data failed:", error);
       commit("setError", error);
-      return { success: false, message: "Delete data failed" };
+      return { success: false, message: "Delete data failed" }; // Finish loading
     }
   },
 };

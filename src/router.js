@@ -7,6 +7,7 @@ import NotFound from "./pages/NotFound.vue";
 import UpdateUserVue from "./pages/updateUser/UpdateUser.vue";
 import ChangePasswordVue from "./pages/info/ChangePassword.vue";
 import store from "./store";
+import ProductListVue from "./pages/productList/ProductList.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -46,8 +47,13 @@ const router = createRouter({
       component: DashBoard,
       beforeEnter: (to, from, next) => {
         const isAuthenticated = store.getters["user/isAuthenticated"];
+        const isAdmin = store.getters["user/userData"].role;
         if (isAuthenticated) {
-          next();
+          if (isAdmin == "ADMIN") {
+            next();
+          } else {
+            next({ name: "productsList" });
+          }
         } else {
           next({ name: "login" });
         }
@@ -94,6 +100,11 @@ const router = createRouter({
           next({ name: "login" });
         }
       },
+    },
+    {
+      path: "/products",
+      name: "productsList",
+      component: ProductListVue,
     },
     {
       path: "/:notFound(.*)",
