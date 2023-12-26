@@ -56,11 +56,30 @@ export default {
 
   //   Update product by id
   async updateProduct(productId, updatedProductData) {
+    console.log(updatedProductData);
     try {
       const response = await axios.put(
         `${API_URL}/product/update/${productId}`,
-        updatedProductData
+        updatedProductData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
+      return response.data;
+    } catch (error) {
+      console.error("Update product failed:", error);
+      throw error.response
+        ? error.response.data
+        : { message: "Update product failed" };
+    }
+  },
+
+  //   get product by id
+  async getProduct(productId) {
+    try {
+      const response = await axios.get(`${API_URL}/product/get/${productId}`);
       return response.data;
     } catch (error) {
       console.error("Update product failed:", error);

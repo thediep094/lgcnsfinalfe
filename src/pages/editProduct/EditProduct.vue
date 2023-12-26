@@ -13,7 +13,7 @@
         <input
           type="text"
           id="name"
-          v-model="name"
+          v-model="product.name"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Name"
           required
@@ -29,7 +29,7 @@
         <input
           type="text"
           id="description"
-          v-model="description"
+          v-model="product.description"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Description"
           required
@@ -44,7 +44,7 @@
         <input
           type="number"
           id="price"
-          v-model="price"
+          v-model="product.price"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Price"
           required
@@ -107,3 +107,68 @@
     </div>
   </div>
 </template>
+
+<script>
+import ProductService from "@/service/ProductService";
+
+export default {
+  data() {
+    return {
+      product: {
+        id: 0,
+        name: "",
+        description: "",
+        price: 0,
+        file: [],
+      },
+      status: false,
+    };
+  },
+  mounted() {
+    this.getDataProduct();
+  },
+  methods: {
+    async getDataProduct() {
+      const response = await ProductService.getProduct(
+        this.$route.params.productId
+      );
+      this.product.id = response?.data?.product.id;
+      this.product.name = response?.data?.product.name;
+      this.product.description = response?.data?.product.description;
+      this.product.price = response?.data?.product.price;
+    },
+
+    uploadImage(event) {
+      const selectedFiles = event.target.files;
+      this.product.file = Array.from(selectedFiles);
+    },
+
+    async submitData() {
+      try {
+        this.$store.dispatch("productManager/clearError");
+        const data = new FormData();
+        data.append("id", this.product.id);
+        data.append("name", this.product.name);
+        data.append("description", this.product.description);
+        data.append("price", this.product.price);
+        console.log(this);
+        for (let i = 0; i < this.product.file?.length; i++) {
+          data.append("file", this.product.file[i]);
+        }
+        const res = await this.$store.dispatch("productManager/updateProduct", {
+          productId: this.$route.params.productId,
+          updatedProductData: data,
+        });
+        if (res?.success) {
+          this.status = true;
+        } else {
+          this.status = false;
+        }
+      } catch (error) {
+        console.log(error);
+        this.status = false;
+      }
+    },
+  },
+};
+</script>
