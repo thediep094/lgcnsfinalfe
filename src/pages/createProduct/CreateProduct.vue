@@ -126,6 +126,9 @@ export default {
     error() {
       return this.$store.getters["productManager/error"];
     },
+    userData() {
+      return this.$store.getters["user/userData"];
+    },
   },
   mounted() {
     this.$store.dispatch("productManager/clearError");
@@ -143,6 +146,8 @@ export default {
         data.append("name", this.name);
         data.append("description", this.description);
         data.append("price", this.price);
+        console.log(this.userData);
+        data.append("memberId", Number(this.userData.memberId));
         for (let i = 0; i < this.file.length; i++) {
           data.append("file", this.file[i]);
         }
