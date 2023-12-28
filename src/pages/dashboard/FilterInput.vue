@@ -1,6 +1,6 @@
 <template>
   <div class="mt-7">
-    <div class="grid gap-6 mb-6 md:grid-cols-2">
+    <div class="grid max-w-5xl gap-6 mb-6 md:grid-cols-2">
       <div>
         <label for="userId" class="block mb-2 text-sm font-medium text-gray-900"
           >ID</label
@@ -57,7 +57,7 @@
       </div>
     </div>
 
-    <div class="grid gap-6 mb-6 md:grid-cols-2">
+    <div class="grid max-w-5xl gap-6 mb-6 md:grid-cols-2">
       <div>
         <label
           for="fromDate"
@@ -105,28 +105,20 @@
         </div>
       </div>
     </div>
-    <div class="flex flex-row gap-3">
+    <div class="flex max-w-5xl flex-row gap-3">
       <button
         @click="getData"
         type="button"
         class="x-5 py-2.5 w-fit px-7 text-sm font-medium text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center"
       >
-        <span v-if="!loading">Search</span>
-        <span v-else>
-          <icon-container iconType="icon-loading"></icon-container>
-          Loading...
-        </span>
+        <span>Search</span>
       </button>
       <button
         @click="exportData"
         type="button"
         class="x-5 py-2.5 w-fit px-7 text-sm font-medium text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center"
       >
-        <span v-if="!loading">Export</span>
-        <span v-else>
-          <icon-container iconType="icon-loading"></icon-container>
-          Loading...
-        </span>
+        <span>Export</span>
       </button>
     </div>
   </div>

@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-row h-screen main-page">
-    <notifications position="top center" speed="3000" closeOnClick />
+    <notifications position="bottom center" speed="1000" closeOnClick />
     <the-navigation></the-navigation>
     <div class="p-4 w-full h-full flex flex-col">
       <the-header></the-header>

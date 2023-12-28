@@ -1,4 +1,6 @@
 import UserService from "@/service/UserService";
+import { useNotification } from "@kyvg/vue3-notification";
+const { notify } = useNotification();
 
 export default {
   async getData({ commit }, filters) {
@@ -38,6 +40,10 @@ export default {
   async deleteUser({ commit }, data) {
     try {
       await UserService.deleteUser(data.deleteUserId, data.data);
+      notify({
+        title: "Delete success",
+        text: `Delete user successfully!`,
+      });
     } catch (error) {
       console.error("Delete data failed:", error);
       commit("setError", error);

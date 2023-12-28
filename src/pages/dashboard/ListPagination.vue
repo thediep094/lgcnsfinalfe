@@ -14,6 +14,7 @@
         class="input p-0 focus:border-none focus:outline-none"
         placeholder="1"
         min="1"
+        max="10"
         @input="handleSizeInput"
         required
       />
@@ -84,8 +85,15 @@ export default {
       }
     },
     incrementPage() {
-      this.currentPage += 1;
-      this.$emit("page-change", this.currentPage);
+      if (this.currentPage < this.users?.totalPage - 1) {
+        this.currentPage += 1;
+        this.$emit("page-change", this.currentPage);
+      } else {
+        this.$notify({
+          title: "Warning!!",
+          text: "Have no more page",
+        });
+      }
     },
   },
 };

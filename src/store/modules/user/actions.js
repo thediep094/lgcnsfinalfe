@@ -13,7 +13,7 @@ export default {
       commit("setUserData", userData);
       commit("setIsAuthenticated", true);
       notify({
-        title: "Authorization",
+        title: "Login success",
         text: "You have been logged in!",
       });
 
@@ -40,6 +40,10 @@ export default {
       const userData = response.data;
       commit("setUserData", userData);
       commit("setIsAuthenticated", true);
+      notify({
+        title: "Register success",
+        text: "You have been logged in!",
+      });
       return { success: true, message: "Register successful" };
     } catch (error) {
       console.error("Login failed:", error);
@@ -60,7 +64,10 @@ export default {
       const response = await UserService.updateDataUser(data.userId, data.data);
       const userData = response.data;
       commit("setUserData", userData);
-      commit("setIsAuthenticated", true);
+      notify({
+        title: "Update success",
+        text: "Update user information succesfully!",
+      });
       return { success: true, message: "Update successful" };
     } catch (error) {
       console.error("Login failed:", error);
@@ -75,6 +82,10 @@ export default {
     try {
       commit("setLoading", true); // Start loading
       await UserService.updateDataUser(data.userId, data.data);
+      notify({
+        title: "Update success",
+        text: "Update user information succesfully!",
+      });
       return { success: true, message: "Update successful" };
     } catch (error) {
       console.error("Update failed:", error);
@@ -89,6 +100,10 @@ export default {
     try {
       commit("setLoading", true); // Start loading
       await UserService.changePasswordUser(data.userId, data.data);
+      notify({
+        title: "Update success",
+        text: "Change password succesfully!",
+      });
       return { success: true, message: "Update successful" };
     } catch (error) {
       console.error("Change password failed:", error);
@@ -105,6 +120,10 @@ export default {
       const response = await UserService.changeAvatar(data.userId, data.data);
       const userData = response.data;
       commit("setUserData", userData);
+      notify({
+        title: "Update success",
+        text: "Change avatar succesfully!",
+      });
       return { success: true, message: "Update successful" };
     } catch (error) {
       console.error("Change avatar failed:", error);

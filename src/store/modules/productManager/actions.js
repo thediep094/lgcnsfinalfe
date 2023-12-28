@@ -1,10 +1,10 @@
 import ProductService from "@/service/ProductService";
-
+import { useNotification } from "@kyvg/vue3-notification";
+const { notify } = useNotification();
 export default {
   async getProductsList({ commit }, filters) {
     try {
       // loading
-
       commit("setLoading", true);
       // Get data
       const response = await ProductService.getProductsFilter(filters);
@@ -26,6 +26,10 @@ export default {
       commit("setLoading", true);
       // Delete product
       await ProductService.deleteProduct(data.productId);
+      notify({
+        title: "Delete success",
+        text: `Delete product ${data.productId} successfully!`,
+      });
       return { success: true, message: "Delete product successful" };
     } catch (error) {
       console.error("Delete product failed:", error);
@@ -41,7 +45,12 @@ export default {
       // loading
       commit("setLoading", true);
       // Update product
+
       await ProductService.updateProduct(productId, updatedProductData);
+      notify({
+        title: "Update success",
+        text: `Update product successfully!`,
+      });
       return { success: true, message: "Update product successful" };
     } catch (error) {
       console.error("Update product failed:", error);
@@ -60,7 +69,12 @@ export default {
       // loading
       commit("setLoading", true);
       // Create product
+
       await ProductService.createProduct(productData.data);
+      notify({
+        title: "Create success",
+        text: `Create product successfully!`,
+      });
       return { success: true, message: "Create product successful" };
     } catch (error) {
       console.error("Create product failed:", error);
