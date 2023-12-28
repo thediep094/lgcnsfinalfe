@@ -16,14 +16,27 @@
     <label for="password" class="block mb-2 text-sm font-medium text-gray-900"
       >Password</label
     >
-    <input
-      type="password"
-      v-model="password"
-      id="password"
-      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-      placeholder="•••••••••"
-      required
-    />
+    <div class="relative">
+      <input
+        :type="showPass ? 'text' : 'password'"
+        v-model="password"
+        id="password"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+        placeholder="•••••••••"
+        required
+        @keyup.enter="submitLogin"
+      />
+      <div
+        class="absolute cursor-pointer right-2 top-0 bottom-0 flex items-center"
+        @click="btnShowPass"
+      >
+        <icon-container
+          v-if="!showPass"
+          iconType="icon-password-display"
+        ></icon-container>
+        <icon-container v-else iconType="icon-password-hidden"></icon-container>
+      </div>
+    </div>
   </div>
 
   <div class="mb-6" v-if="error">
@@ -62,12 +75,16 @@
 </template>
 
 <script>
+import IconContainer from "@/components/IconContainer.vue";
 export default {
+  components: {
+    IconContainer,
+  },
   data() {
     return {
       id: "",
       password: "",
-      hiddenPassword: false,
+      showPass: false,
     };
   },
   computed: {
@@ -93,6 +110,9 @@ export default {
         // Handle login failure, show error messages, etc.
         console.error("Login failed", error);
       }
+    },
+    btnShowPass() {
+      this.showPass = !this.showPass;
     },
   },
 };

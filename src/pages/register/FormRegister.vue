@@ -6,8 +6,9 @@
     <input
       type="text"
       id="id"
-      v-model="id"
+      v-model="id.value"
       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+      :class="{ 'border-red-500': id.error }"
       placeholder="Your ID"
       required
     />
@@ -17,14 +18,27 @@
     <label for="password" class="block mb-2 text-sm font-medium text-gray-900"
       >Password</label
     >
-    <input
-      type="password"
-      id="password"
-      v-model="password"
-      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-      placeholder="•••••••••"
-      required
-    />
+    <div class="relative">
+      <input
+        :type="password.show ? 'text' : 'password'"
+        id="password"
+        v-model="password.value"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+        :class="{ 'border-red-500': password.error }"
+        placeholder="•••••••••"
+        required
+      />
+      <div
+        class="absolute cursor-pointer right-2 top-0 bottom-0 flex items-center"
+        @click="btnShowPass"
+      >
+        <icon-container
+          v-if="!password.show"
+          iconType="icon-password-display"
+        ></icon-container>
+        <icon-container v-else iconType="icon-password-hidden"></icon-container>
+      </div>
+    </div>
   </div>
   <h2 class="mb-2 text-sm font-semibold text-gray-900 dark:text-white">
     Password requirements:
@@ -48,14 +62,27 @@
       class="block mb-2 text-sm font-medium text-gray-900"
       >Confirm Password</label
     >
-    <input
-      type="password"
-      v-model="confirmPassword"
-      id="confirm-password"
-      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-      placeholder="•••••••••"
-      required
-    />
+    <div class="relative">
+      <input
+        :type="confirmPassword.show ? 'text' : 'password'"
+        v-model="confirmPassword.value"
+        id="confirm-password"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+        :class="{ 'border-red-500': confirmPassword.error }"
+        placeholder="•••••••••"
+        required
+      />
+      <div
+        class="absolute cursor-pointer right-2 top-0 bottom-0 flex items-center"
+        @click="btnShowConfirmPass"
+      >
+        <icon-container
+          v-if="!confirmPassword.show"
+          iconType="icon-password-display"
+        ></icon-container>
+        <icon-container v-else iconType="icon-password-hidden"></icon-container>
+      </div>
+    </div>
   </div>
   <div class="mb-3 flex md:flex-row flex-col md:gap-2">
     <div class="flex-1">
@@ -65,9 +92,10 @@
       <input
         type="text"
         id="email"
-        v-model="email"
+        v-model="email.value"
         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         placeholder="Email@"
+        :class="{ 'border-red-500': email.error }"
         required
       />
     </div>
@@ -95,8 +123,9 @@
     <input
       type="text"
       id="name"
-      v-model="name"
+      v-model="name.value"
       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+      :class="{ 'border-red-500': name.error }"
       placeholder="Your fullname"
       required
     />
@@ -111,8 +140,9 @@
     <input
       type="text"
       id="mobilePhone"
-      v-model="mobilePhone"
+      v-model="mobilePhone.value"
       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+      :class="{ 'border-red-500': mobilePhone.error }"
       placeholder="Your mobile phone"
       required
     />
@@ -154,15 +184,40 @@
 </template>
 
 <script>
+import IconContainer from "@/components/IconContainer.vue";
+
 export default {
+  components: {
+    IconContainer,
+  },
   data() {
     return {
-      id: "",
-      password: "",
-      email: "",
-      mobilePhone: "",
-      name: "",
-      confirmPassword: "",
+      id: {
+        value: "",
+        error: false,
+      },
+      password: {
+        value: "",
+        error: false,
+        show: false,
+      },
+      email: {
+        value: "",
+        error: false,
+      },
+      mobilePhone: {
+        value: "",
+        error: false,
+      },
+      name: {
+        value: "",
+        error: false,
+      },
+      confirmPassword: {
+        value: "",
+        error: false,
+        show: false,
+      },
       domain: "naver.com",
     };
   },
@@ -178,14 +233,14 @@ export default {
   methods: {
     async submitRegister() {
       try {
-        if (this.checkValidate() && this.checkPassword(this.password)) {
+        if (this.checkValidate() && this.checkPassword(this.password.value)) {
           this.$store.commit("user/setError", null);
           await this.$store.dispatch("user/register", {
-            userId: this.id.trim(),
-            password: this.password,
-            name: this.name,
-            mobilePhone: this.mobilePhone,
-            email: this.email + "@" + this.domain,
+            userId: this.id.value.trim(),
+            password: this.password.value,
+            name: this.name.value,
+            mobilePhone: this.mobilePhone.value,
+            email: this.email.value + "@" + this.domain,
           });
           // If login is successful, navigate to the dashboard and clear error
           this.$router.push({ name: "dashboard" });
@@ -201,25 +256,34 @@ export default {
       const regexName = /^[a-zA-Z ]+$/;
       const regexPhone = /^[0-9]+$/;
 
-      if (!regexId.test(this.id)) {
+      if (!regexId.test(this.id.value)) {
         this.$store.commit("user/setError", {
           message: "ID must be at least 4 digits long.",
         });
+        this.id.error = true;
         return false;
+      } else {
+        this.id.error = false;
       }
 
-      if (!regexName.test(this.name)) {
+      if (!regexName.test(this.name.value)) {
         this.$store.commit("user/setError", {
           message: "The name is only entered in letters.",
         });
+        this.name.error = true;
         return false;
+      } else {
+        this.name.error = false;
       }
 
-      if (!regexPhone.test(this.mobilePhone)) {
+      if (!regexPhone.test(this.mobilePhone.value)) {
         this.$store.commit("user/setError", {
           message: "Mobile phone number can only contain numbers.",
         });
+        this.mobilePhone.error = true;
         return false;
+      } else {
+        this.mobilePhone.error = false;
       }
 
       this.$store.commit("user/setError", null);
@@ -227,23 +291,32 @@ export default {
     },
 
     checkPassword() {
-      const countCombinations = this.containCount(this.password);
+      const countCombinations = this.containCount(this.password.value);
       const checkSpecialCharacters = /^[a-zA-Z0-9@#$%^&*]+$/;
       const consecutiveNumber = /.*\d{4,}.*/;
 
-      if (this.password != this.confirmPassword) {
+      if (this.password.value != this.confirmPassword.value) {
         this.$store.commit("user/setError", {
           message: "Your password not equal your confirm password",
         });
+        this.password.error = true;
+        this.confirmPassword.error = true;
         return false;
+      } else {
+        this.password.error = false;
+        this.confirmPassword.error = false;
       }
 
-      if (this.password.length < 8) {
+      if (this.password.value.length < 8) {
         this.$store.commit("user/setError", {
           message:
             "Your password not formatted correctly: Password must have at least 8 characters",
         });
+        this.password.error = true;
+
         return false;
+      } else {
+        this.password.error = false;
       }
 
       if (countCombinations < 2) {
@@ -251,46 +324,61 @@ export default {
           message:
             "Your password not formatted correctly: Password must have at least 2 combinations: letters, numbers, or special characters",
         });
+        this.password.error = true;
         return false;
+      } else {
+        this.password.error = false;
       }
 
-      if (this.password.length < 10 && countCombinations == 2) {
+      if (this.password.value.length < 10 && countCombinations == 2) {
         this.$store.commit("user/setError", {
           message:
             "Your password not formatted correctly: Password must have at least 10 characters if 2 combinations: letters, numbers, or special characters",
         });
+        this.password.error = true;
         return false;
+      } else {
+        this.password.error = false;
       }
 
-      if (this.password.length < 8 && countCombinations == 3) {
+      if (this.password.value.length < 8 && countCombinations == 3) {
         this.$store.commit("user/setError", {
           message:
             "Your password not formatted correctly: Password must have at least 8 characters if 3 combinations: letters, numbers, or special characters",
         });
+        this.password.error = true;
         return false;
+      } else {
+        this.password.error = false;
       }
 
-      if (!checkSpecialCharacters.test(this.password)) {
+      if (!checkSpecialCharacters.test(this.password.value)) {
         this.$store.commit("user/setError", {
           message:
             "Your password not formatted correctly: Password can only contain letters, numbers, and the special characters @#$%^&*",
         });
+        this.password.error = true;
         return false;
+      } else {
+        this.password.error = false;
       }
 
-      if (consecutiveNumber.test(this.password)) {
+      if (consecutiveNumber.test(this.password.value)) {
         this.$store.commit("user/setError", {
           message:
             "Your password not formatted correctly: Consecutive numbers must not be more than 3 characters",
         });
+        this.password.error = true;
+
         return false;
       } else {
-        for (const s of this.password) {
+        for (const s of this.password.value) {
           if (Number(s)) {
-            const indexOfS = this.password.indexOf(s);
+            const indexOfS = this.password.value.indexOf(s);
             const currentNumber = Number(s);
-            const nextNumber = Number(this.password[indexOfS + 1]) - 1;
-            const nextNextNumber = Number(this.password[indexOfS + 2]) - 2;
+            const nextNumber = Number(this.password.value[indexOfS + 1]) - 1;
+            const nextNextNumber =
+              Number(this.password.value[indexOfS + 2]) - 2;
             if (
               currentNumber == nextNumber &&
               currentNumber == nextNextNumber
@@ -299,10 +387,13 @@ export default {
                 message:
                   "Your password not formatted correctly: Consecutive numbers are not that are 1 value greater than each other",
               });
+              this.password.error = true;
+
               return false;
             }
           }
         }
+        this.password.error = false;
         this.$store.commit("user/setError", null);
         return true;
       }
@@ -326,6 +417,12 @@ export default {
       }
 
       return count;
+    },
+    btnShowPass() {
+      this.password.show = !this.password.show;
+    },
+    btnShowConfirmPass() {
+      this.confirmPassword.show = !this.confirmPassword.show;
     },
   },
 };

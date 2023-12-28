@@ -40,8 +40,8 @@
 </template>
 
 <script>
-import FormLogin from "./FormLogin.vue";
-import FormRegister from "./FormRegister.vue";
+import FormLogin from "../pages/login/FormLogin.vue";
+import FormRegister from "../pages/register/FormRegister.vue";
 
 export default {
   props: {

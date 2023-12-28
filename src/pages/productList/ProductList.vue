@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import ProductItem from "@/components/ProductItem.vue";
+import ProductItem from "./ProductItem.vue";
 import IconContainer from "@/components/IconContainer.vue";
 import ProductListPagination from "./ProductListPagination.vue";
 export default {
