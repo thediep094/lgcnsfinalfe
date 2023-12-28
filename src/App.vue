@@ -4,7 +4,9 @@
     <the-navigation></the-navigation>
     <div class="p-4 w-full h-full flex flex-col">
       <the-header></the-header>
-      <router-view></router-view>
+      <div class="body">
+        <router-view></router-view>
+      </div>
     </div>
   </div>
 </template>
@@ -25,5 +27,9 @@ export default {
 <style scoped>
 .main-page {
   background-color: #fffefc;
+}
+
+.body {
+  padding-top: 100px;
 }
 </style>

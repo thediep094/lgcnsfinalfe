@@ -160,6 +160,7 @@ export default {
     },
   },
   mounted() {
+    this.$store.dispatch("user/clearError");
     this.getDataFromUser();
   },
 

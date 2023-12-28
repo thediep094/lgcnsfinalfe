@@ -1081,6 +1081,10 @@ input:checked + .toggle-bg {
   position: relative;
 }
 
+.sticky {
+  position: sticky;
+}
+
 .inset-0 {
   inset: 0px;
 }
@@ -1233,6 +1237,18 @@ input:checked + .toggle-bg {
 
 .mt-7 {
   margin-top: 1.75rem;
+}
+
+.mt-8 {
+  margin-top: 2rem;
+}
+
+.mt-16 {
+  margin-top: 4rem;
+}
+
+.mt-14 {
+  margin-top: 3.5rem;
 }
 
 .block {

@@ -61,10 +61,12 @@ export default {
   methods: {
     callChangeLogin() {
       this.changeLogin();
+      this.$store.dispatch("user/clearError");
     },
 
     callChangeRegister() {
       this.changeRegister();
+      this.$store.dispatch("user/clearError");
     },
   },
   components: {

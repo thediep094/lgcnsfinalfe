@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header class="header">
     <div class="flex md:flex-row flex-col w-full md:justify-between">
       <button
         data-drawer-target="drawer-navigation"
@@ -65,5 +65,14 @@ export default {
 .dashboard__avatar img {
   width: 45px;
   height: 45px;
+}
+.header {
+  position: fixed;
+  width: 98%;
+  left: 1%;
+  padding: 10px;
+  border: 1px solid #8f9bb3;
+  border-radius: 10px;
+  background: #fff;
 }
 </style>

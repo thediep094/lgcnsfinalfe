@@ -99,6 +99,9 @@ export default {
       status: false,
     };
   },
+  mounted() {
+    this.$store.dispatch("user/clearError");
+  },
   computed: {
     error() {
       return this.$store.getters["user/error"];

@@ -196,6 +196,7 @@ export default {
     },
   },
   mounted() {
+    this.$store.dispatch("user/clearError");
     this.user.domain = this.domainData;
     this.user.email = this.emailData;
     this.user.mobilePhone = this.mobilePhoneData;

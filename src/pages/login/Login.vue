@@ -18,7 +18,6 @@
 </template>
 
 <script>
-// import IconContainer from "@/components/IconContainer.vue";
 import FormUser from "@/components/FormUser.vue";
 export default {
   name: "LoginPage",
@@ -28,7 +27,6 @@ export default {
     };
   },
   components: {
-    // IconContainer,
     FormUser,
   },
   methods: {
