@@ -8,12 +8,12 @@
       />
       <form class="max-w-lg mx-auto mb-5">
         <label
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          class="block mb-2 text-sm font-medium text-gray-900"
           for="user_avatar"
           >Upload file</label
         >
         <input
-          class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+          class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
           aria-describedby="user_avatar_help"
           id="user_avatar"
           type="file"
@@ -21,25 +21,20 @@
           @change="changeAvatar"
           accept="image/*"
         />
-        <div
-          class="mt-1 text-sm text-gray-500 dark:text-gray-300"
-          id="user_avatar_help"
-        >
+        <div class="mt-1 text-sm text-gray-500" id="user_avatar_help">
           A profile picture is useful to confirm your are logged into your
           account
         </div>
       </form>
       <div class="mb-5">
-        <label
-          for="userId"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        <label for="userId" class="block mb-2 text-sm font-medium text-gray-900"
           >Your ID</label
         >
         <input
           type="text"
           id="userId"
           :value="userData?.userId"
-          class="shadow-sm cursor-not-allowed bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+          class="shadow-sm cursor-not-allowed bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           placeholder="UserId"
           disabled
           required
@@ -49,14 +44,14 @@
         <div class="flex-1">
           <label
             for="email"
-            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            class="block mb-2 text-sm font-medium text-gray-900"
             >Your email</label
           >
           <input
             type="email"
             id="email"
             v-model="user.email"
-            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             placeholder="name@lgcns.com"
             required
           />
@@ -64,13 +59,13 @@
         <div>
           <label
             for="domain"
-            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            class="block mb-2 text-sm font-medium text-gray-900"
             >Domain</label
           >
           <select
             id="domain"
             v-model="user.domain"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           >
             <option>naver.com</option>
             <option>daum.net</option>
@@ -81,15 +76,13 @@
         </div>
       </div>
       <div class="mb-5">
-        <label
-          for="name"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        <label for="name" class="block mb-2 text-sm font-medium text-gray-900"
           >Your name</label
         >
         <input
           type="text"
           id="name"
-          class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+          class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           required
           v-model="user.name"
         />
@@ -97,46 +90,42 @@
       <div class="mb-5">
         <label
           for="mobilePhone"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          class="block mb-2 text-sm font-medium text-gray-900"
           >Your mobile phone</label
         >
         <input
           type="text"
           id="mobilePhone"
           v-model="user.mobilePhone"
-          class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+          class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           required
         />
       </div>
 
       <div class="mb-5">
-        <label
-          for="role"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        <label for="role" class="block mb-2 text-sm font-medium text-gray-900"
           >Your role</label
         >
         <input
           type="text"
           id="role"
           :value="userData?.role"
-          class="shadow-sm cursor-not-allowed bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+          class="shadow-sm cursor-not-allowed bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           disabled
         />
       </div>
       <div class="mb-6" v-if="status">
-        <p class="mt-2 text-sm text-green-500 dark:text-red-500">
-          Update user successful
-        </p>
+        <p class="mt-2 text-sm text-green-500">Update user successful</p>
       </div>
       <div class="mb-6" v-if="error">
-        <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+        <p class="mt-2 text-sm text-red-600">
           {{ error?.message }}
         </p>
       </div>
       <button
         @click="updateData"
         type="submit"
-        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
       >
         <span v-if="!loading">Update</span>
         <span v-else>

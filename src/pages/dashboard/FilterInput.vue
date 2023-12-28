@@ -2,43 +2,39 @@
   <div class="mt-7">
     <div class="grid gap-6 mb-6 md:grid-cols-2">
       <div>
-        <label
-          for="userId"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        <label for="userId" class="block mb-2 text-sm font-medium text-gray-900"
           >ID</label
         >
         <input
           type="text"
           id="userId"
           v-model="userId"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           placeholder="ID"
           required
           @input="changeFilters('userId', userId)"
         />
         <div class="mb-6" v-if="messageId.length > 0">
-          <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+          <p class="mt-2 text-sm text-red-600">
             {{ messageId }}
           </p>
         </div>
       </div>
       <div>
-        <label
-          for="name"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        <label for="name" class="block mb-2 text-sm font-medium text-gray-900"
           >Name</label
         >
         <input
           type="text"
           id="name"
           v-model="name"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           placeholder="Name"
           required
           @input="changeFilters('name', name)"
         />
         <div class="mb-6" v-if="messageName.length > 0">
-          <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+          <p class="mt-2 text-sm text-red-600">
             {{ messageName }}
           </p>
         </div>
@@ -46,7 +42,7 @@
       <div>
         <label
           for="mobilePhone"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          class="block mb-2 text-sm font-medium text-gray-900"
           >Mobile phone</label
         >
         <input
@@ -54,7 +50,7 @@
           id="mobilePhone"
           v-model="mobilePhone"
           @input="changeFilters('mobilePhone', mobilePhone)"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           placeholder="Mobile phone"
           required
         />
@@ -65,7 +61,7 @@
       <div>
         <label
           for="fromDate"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          class="block mb-2 text-sm font-medium text-gray-900"
           >Date</label
         >
         <div class="relative">
@@ -81,15 +77,13 @@
             datepicker-format="yyyy-mm-dd"
             v-model="fromDate"
             type="date"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
             placeholder="Select date"
           />
         </div>
       </div>
       <div>
-        <label
-          for="toDate"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        <label for="toDate" class="block mb-2 text-sm font-medium text-gray-900"
           >To Date</label
         >
         <div class="relative">
@@ -105,7 +99,7 @@
             @input="changeFilters('toDate', toDate)"
             datepicker-format="yyyy-mm-dd"
             type="date"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
             placeholder="Select date"
           />
         </div>
@@ -115,7 +109,7 @@
       <button
         @click="getData"
         type="button"
-        class="x-5 py-2.5 w-fit px-7 text-sm font-medium text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        class="x-5 py-2.5 w-fit px-7 text-sm font-medium text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center"
       >
         <span v-if="!loading">Search</span>
         <span v-else>
@@ -126,7 +120,7 @@
       <button
         @click="exportData"
         type="button"
-        class="x-5 py-2.5 w-fit px-7 text-sm font-medium text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        class="x-5 py-2.5 w-fit px-7 text-sm font-medium text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center"
       >
         <span v-if="!loading">Export</span>
         <span v-else>

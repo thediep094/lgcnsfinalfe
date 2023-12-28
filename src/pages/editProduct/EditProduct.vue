@@ -5,16 +5,14 @@
         <span>Fill form to edit product.</span>
       </p>
       <div class="mb-3 max-w-5xl">
-        <label
-          for="name"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        <label for="name" class="block mb-2 text-sm font-medium text-gray-900"
           >Name</label
         >
         <input
           type="text"
           id="name"
           v-model="product.name"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           placeholder="Name"
           required
         />
@@ -23,29 +21,27 @@
       <div class="mb-3 max-w-5xl">
         <label
           for="description"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          class="block mb-2 text-sm font-medium text-gray-900"
           >Description</label
         >
         <input
           type="text"
           id="description"
           v-model="product.description"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           placeholder="Description"
           required
         />
       </div>
       <div class="mb-3 max-w-5xl">
-        <label
-          for="price"
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        <label for="price" class="block mb-2 text-sm font-medium text-gray-900"
           >Price</label
         >
         <input
           type="number"
           id="price"
           v-model="product.price"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           placeholder="Price"
           required
         />
@@ -53,12 +49,12 @@
 
       <div class="mb-3 max-w-5xl">
         <label
-          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          class="block mb-2 text-sm font-medium text-gray-900"
           for="file_input"
           >Upload file</label
         >
         <input
-          class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+          class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50"
           id="file_input"
           type="file"
           ref="imageProduct"
@@ -68,19 +64,17 @@
         />
       </div>
       <div class="mb-6" v-if="status">
-        <p class="mt-2 text-sm text-green-500 dark:text-red-500">
-          Edit product successful
-        </p>
+        <p class="mt-2 text-sm text-green-500">Edit product successful</p>
       </div>
       <div class="mb-6" v-if="error">
-        <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+        <p class="mt-2 text-sm text-red-600">
           {{ error?.message }}
         </p>
       </div>
       <button
         @click="submitData"
         type="submit"
-        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
       >
         <span v-if="!loading">Submit</span>
         <span v-else>

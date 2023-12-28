@@ -1,6 +1,7 @@
 import AuthService from "@/service/AuthService";
 import UserService from "@/service/UserService";
-
+import { useNotification } from "@kyvg/vue3-notification";
+const { notify } = useNotification();
 export default {
   async login({ commit }, credentials) {
     try {
@@ -11,6 +12,10 @@ export default {
       const userData = response.data;
       commit("setUserData", userData);
       commit("setIsAuthenticated", true);
+      notify({
+        title: "Authorization",
+        text: "You have been logged in!",
+      });
 
       return { success: true, message: "Login successful" };
     } catch (error) {

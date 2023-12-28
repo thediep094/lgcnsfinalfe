@@ -48,7 +48,7 @@
           <tr
             v-for="user in users?.users"
             :key="user?.userId"
-            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+            class="bg-white border-b"
           >
             <td class="px-6 py-4">{{ user.userId }}</td>
 

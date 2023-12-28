@@ -1,31 +1,27 @@
 <template>
   <div class="mb-3">
-    <label
-      for="id"
-      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+    <label for="id" class="block mb-2 text-sm font-medium text-gray-900"
       >ID Account</label
     >
     <input
       type="text"
       id="id"
       v-model="id"
-      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
       placeholder="Your ID"
       required
     />
   </div>
 
   <div class="mb-3">
-    <label
-      for="password"
-      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+    <label for="password" class="block mb-2 text-sm font-medium text-gray-900"
       >Password</label
     >
     <input
       type="password"
       id="password"
       v-model="password"
-      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
       placeholder="•••••••••"
       required
     />
@@ -33,44 +29,40 @@
   <div class="mb-3">
     <label
       for="confirm-password"
-      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+      class="block mb-2 text-sm font-medium text-gray-900"
       >Confirm Password</label
     >
     <input
       type="password"
       v-model="confirmPassword"
       id="confirm-password"
-      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
       placeholder="•••••••••"
       required
     />
   </div>
   <div class="mb-3 flex md:flex-row flex-col md:gap-2">
     <div class="flex-1">
-      <label
-        for="email"
-        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+      <label for="email" class="block mb-2 text-sm font-medium text-gray-900"
         >Email address</label
       >
       <input
         type="text"
         id="email"
         v-model="email"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         placeholder="Email@"
         required
       />
     </div>
     <div>
-      <label
-        for="domain"
-        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+      <label for="domain" class="block mb-2 text-sm font-medium text-gray-900"
         >Domain</label
       >
       <select
         id="domain"
         v-model="domain"
-        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
       >
         <option>naver.com</option>
         <option>daum.net</option>
@@ -81,16 +73,14 @@
     </div>
   </div>
   <div class="mb-3">
-    <label
-      for="name"
-      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+    <label for="name" class="block mb-2 text-sm font-medium text-gray-900"
       >Name</label
     >
     <input
       type="text"
       id="name"
       v-model="name"
-      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
       placeholder="Your fullname"
       required
     />
@@ -99,21 +89,21 @@
   <div class="mb-6">
     <label
       for="mobilePhone"
-      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+      class="block mb-2 text-sm font-medium text-gray-900"
       >Mobile Phone</label
     >
     <input
       type="text"
       id="mobilePhone"
       v-model="mobilePhone"
-      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
       placeholder="Your mobile phone"
       required
     />
   </div>
 
   <div class="mb-6" v-if="error">
-    <p class="mt-2 text-sm text-red-600 dark:text-red-500">
+    <p class="mt-2 text-sm text-red-600">
       {{ error?.message }}
     </p>
   </div>
@@ -121,7 +111,7 @@
   <button
     @click="submitRegister"
     type="button"
-    class="text-white transition-all w-full bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+    class="text-white transition-all w-full bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
   >
     <span v-if="!loading">Register</span>
     <span v-else>
@@ -194,7 +184,6 @@ export default {
       const regexId = /\d{4,}/;
       const regexName = /^[a-zA-Z ]+$/;
       const regexPhone = /^[0-9]+$/;
-      
 
       if (!regexId.test(this.id)) {
         this.$store.commit("user/setError", {
@@ -226,10 +215,9 @@ export default {
       const checkSpecialCharacters = /^[a-zA-Z0-9@#$%^&*]+$/;
       const consecutiveNumber = /.*\d{4,}.*/;
 
-      if(this.password != this.confirmPassword) {
+      if (this.password != this.confirmPassword) {
         this.$store.commit("user/setError", {
-          message:
-            "Your password not equal your confirm password",
+          message: "Your password not equal your confirm password",
         });
         return false;
       }
