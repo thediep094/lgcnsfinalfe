@@ -146,8 +146,13 @@ export default {
         data.append("name", this.name);
         data.append("description", this.description);
         data.append("price", this.price);
-        console.log(this.userData);
         data.append("memberId", Number(this.userData.memberId));
+        if (!this.name || !this.description) {
+          this.$store.commit("productManager/setError", {
+            message: "Name and description are required.",
+          });
+          return;
+        }
         for (let i = 0; i < this.file.length; i++) {
           data.append("file", this.file[i]);
         }

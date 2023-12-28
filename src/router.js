@@ -49,7 +49,7 @@ const router = createRouter({
       component: DashBoard,
       beforeEnter: (to, from, next) => {
         const isAuthenticated = store.getters["user/isAuthenticated"];
-        const isAdmin = store.getters["user/userData"].role;
+        const isAdmin = store.getters["user/userData"]?.role;
         if (isAuthenticated) {
           if (isAdmin == "ADMIN") {
             next();
