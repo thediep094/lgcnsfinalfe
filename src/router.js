@@ -11,6 +11,40 @@ import ProductListVue from "./pages/productList/ProductList.vue";
 import ProductManager from "./pages/productManager/ProductManager.vue";
 import CreateProductVue from "./pages/createProduct/CreateProduct.vue";
 import EditProductVue from "./pages/editProduct/EditProduct.vue";
+
+const requireAuth = (to, from, next) => {
+  const isAuthenticated = store.getters["user/isAuthenticated"];
+  console.log(isAuthenticated);
+  if (isAuthenticated) {
+    next({ name: "dashboard" });
+  } else {
+    next();
+  }
+};
+
+const requireLogin = (to, from, next) => {
+  const isAuthenticated = store.getters["user/isAuthenticated"];
+  if (isAuthenticated) {
+    next();
+  } else {
+    next({ name: "login" });
+  }
+};
+
+const requireAuthAndAdmin = (to, from, next) => {
+  const isAuthenticated = store.getters["user/isAuthenticated"];
+  const isAdmin = store.getters["user/userData"]?.role;
+  if (isAuthenticated) {
+    if (isAdmin == "ADMIN") {
+      next();
+    } else {
+      next({ name: "productsList" });
+    }
+  } else {
+    next({ name: "login" });
+  }
+};
+
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -22,12 +56,7 @@ const router = createRouter({
       path: "/register",
       component: Register,
       beforeEnter: (to, from, next) => {
-        const isAuthenticated = store.getters["user/isAuthenticated"];
-        if (isAuthenticated) {
-          next({ name: "dashboard" });
-        } else {
-          next();
-        }
+        requireAuth(to, from, next);
       },
     },
     {
@@ -35,12 +64,7 @@ const router = createRouter({
       name: "login",
       component: Login,
       beforeEnter: (to, from, next) => {
-        const isAuthenticated = store.getters["user/isAuthenticated"];
-        if (isAuthenticated) {
-          next({ name: "dashboard" });
-        } else {
-          next();
-        }
+        requireAuth(to, from, next);
       },
     },
     {
@@ -48,17 +72,7 @@ const router = createRouter({
       name: "dashboard",
       component: DashBoard,
       beforeEnter: (to, from, next) => {
-        const isAuthenticated = store.getters["user/isAuthenticated"];
-        const isAdmin = store.getters["user/userData"]?.role;
-        if (isAuthenticated) {
-          if (isAdmin == "ADMIN") {
-            next();
-          } else {
-            next({ name: "productsList" });
-          }
-        } else {
-          next({ name: "login" });
-        }
+        requireAuthAndAdmin(to, from, next);
       },
     },
     {
@@ -66,17 +80,7 @@ const router = createRouter({
       name: "productManager",
       component: ProductManager,
       beforeEnter: (to, from, next) => {
-        const isAuthenticated = store.getters["user/isAuthenticated"];
-        const isAdmin = store.getters["user/userData"].role;
-        if (isAuthenticated) {
-          if (isAdmin == "ADMIN") {
-            next();
-          } else {
-            next({ name: "productsList" });
-          }
-        } else {
-          next({ name: "login" });
-        }
+        requireAuthAndAdmin(to, from, next);
       },
     },
     {
@@ -84,17 +88,7 @@ const router = createRouter({
       name: "createProduct",
       component: CreateProductVue,
       beforeEnter: (to, from, next) => {
-        const isAuthenticated = store.getters["user/isAuthenticated"];
-        const isAdmin = store.getters["user/userData"].role;
-        if (isAuthenticated) {
-          if (isAdmin == "ADMIN") {
-            next();
-          } else {
-            next({ name: "productsList" });
-          }
-        } else {
-          next({ name: "login" });
-        }
+        requireAuthAndAdmin(to, from, next);
       },
     },
     {
@@ -103,13 +97,7 @@ const router = createRouter({
       component: EditProductVue,
       props: true,
       beforeEnter: (to, from, next) => {
-        const isAuthenticated = store.getters["user/isAuthenticated"];
-        const isAdmin = store.getters["user/userData"].role;
-        if (isAuthenticated && isAdmin == "ADMIN") {
-          next();
-        } else {
-          next({ name: "login" });
-        }
+        requireAuthAndAdmin(to, from, next);
       },
     },
     {
@@ -117,12 +105,7 @@ const router = createRouter({
       name: "infoUser",
       component: InfoUser,
       beforeEnter: (to, from, next) => {
-        const isAuthenticated = store.getters["user/isAuthenticated"];
-        if (isAuthenticated) {
-          next();
-        } else {
-          next({ name: "login" });
-        }
+        requireLogin(to, from, next);
       },
     },
     {
@@ -131,12 +114,7 @@ const router = createRouter({
       props: true,
       component: ChangePasswordVue,
       beforeEnter: (to, from, next) => {
-        const isAuthenticated = store.getters["user/isAuthenticated"];
-        if (isAuthenticated) {
-          next();
-        } else {
-          next({ name: "login" });
-        }
+        requireLogin(to, from, next);
       },
     },
     {
@@ -145,13 +123,7 @@ const router = createRouter({
       component: UpdateUserVue,
       props: true,
       beforeEnter: (to, from, next) => {
-        const isAuthenticated = store.getters["user/isAuthenticated"];
-        const isAdmin = store.getters["user/userData"].role;
-        if (isAuthenticated && isAdmin == "ADMIN") {
-          next();
-        } else {
-          next({ name: "login" });
-        }
+        requireAuthAndAdmin(to, from, next);
       },
     },
     {

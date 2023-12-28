@@ -26,6 +26,22 @@
       required
     />
   </div>
+  <h2 class="mb-2 text-sm font-semibold text-gray-900 dark:text-white">
+    Password requirements:
+  </h2>
+  <ul
+    class="max-w-md text-sm space-y-1 text-gray-500 list-disc list-inside mb-3"
+  >
+    <li>
+      Only letters, numbers, and special and characters are entered for password
+    </li>
+    <li>
+      At least 8 characters if password have 3 combinations and 10 characters if
+      password have 2 combinations.
+    </li>
+    <li>Special characters are only @#$%^&* can be entered</li>
+    <li>Consecutive numbers must not be more than 3 characters</li>
+  </ul>
   <div class="mb-3">
     <label
       for="confirm-password"

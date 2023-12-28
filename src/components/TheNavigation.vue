@@ -30,7 +30,7 @@
               <span class="ms-3">Product Manager</span>
             </router-link>
           </li>
-          <li>
+          <li v-if="isAuthenticated">
             <router-link
               to="/products"
               class="flex items-center p-2 text-gray-900 rounded-lg group"
