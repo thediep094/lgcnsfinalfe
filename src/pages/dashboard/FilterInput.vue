@@ -3,8 +3,11 @@
     <div class="grid max-w-5xl gap-6 mb-6 md:grid-cols-2">
       <div>
         <label for="userId" class="block mb-2 text-sm font-medium text-gray-900"
-          >ID</label
-        >
+          >ID
+          <guide-input
+            :message="'Enter at least 3 characters to be searched'"
+          ></guide-input>
+        </label>
         <input
           type="text"
           id="userId"
@@ -22,8 +25,11 @@
       </div>
       <div>
         <label for="name" class="block mb-2 text-sm font-medium text-gray-900"
-          >Name</label
-        >
+          >Name
+          <guide-input
+            :message="'Enter at least 2 characters to be searched'"
+          ></guide-input>
+        </label>
         <input
           type="text"
           id="name"
@@ -126,6 +132,7 @@
 
 <script>
 import IconContainer from "@/components/IconContainer.vue";
+import GuideInput from "@/components/GuideInput.vue";
 export default {
   props: {
     filters: {
@@ -161,6 +168,7 @@ export default {
   },
   components: {
     IconContainer,
+    GuideInput,
   },
   methods: {
     changeFilters(key, value) {

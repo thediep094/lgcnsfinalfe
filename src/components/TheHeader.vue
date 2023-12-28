@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <div class="flex md:flex-row flex-col w-full md:justify-between">
+    <div class="flex md:flex-row w-full md:justify-between">
       <button
         data-drawer-target="drawer-navigation"
         data-drawer-show="drawer-navigation"
@@ -10,20 +10,21 @@
       >
         <div class="logo px-3 flex items-center flex-row gap-4">
           <icon-container iconType="icon-sidebar"></icon-container>
-          <icon-container iconType="logo"></icon-container>
+          <icon-container
+            iconType="logo"
+            class="md:block hidden"
+          ></icon-container>
         </div>
       </button>
       <div
-        class="dashboard__user flex md:flex-row flex-col w-full md:justify-between md:px-5"
+        class="dashboard__user flex flex-row w-full md:justify-between justify-end items-center md:px-5"
       >
-        <div class="dashboard__user-content md:mt-0 mt-4">
+        <div class="dashboard__user-content md:mt-0 hidden md:flex flex-col">
           <p class="font-bold">Hello, {{ userData?.name }}</p>
           <p>Have a nice day!</p>
         </div>
 
-        <div
-          class="dashboard__user-actions flex flex-row items-center md:mt-0 mt-4"
-        >
+        <div class="dashboard__user-actions flex flex-row items-center md:mt-0">
           <div class="dashboard__avatar">
             <img
               class="object-cover rounded-full"
@@ -74,5 +75,6 @@ export default {
   border: 1px solid #8f9bb3;
   border-radius: 10px;
   background: #fff;
+  z-index: 10;
 }
 </style>
