@@ -126,6 +126,9 @@ export default {
     error() {
       return this.$store.getters["productManager/error"];
     },
+    memberId() {
+      return this.$store.getters["user/userData"]?.memberId;
+    },
   },
   methods: {
     async getDataProduct() {
@@ -151,6 +154,7 @@ export default {
         data.append("name", this.product.name);
         data.append("description", this.product.description);
         data.append("price", this.product.price);
+        data.append("memberId", this.memberId);
         if (this.product.file?.length > 0) {
           for (let i = 0; i < this.product.file?.length; i++) {
             data.append("file", this.product.file[i]);
