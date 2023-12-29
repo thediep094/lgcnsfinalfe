@@ -5,19 +5,18 @@
     @get-data="getData"
     @export-data="exportData"
   ></filter-input>
-  <div class="list-users mt-5 flex flex-col bg-white">
+  <div class="list-users relative mt-5 flex flex-col bg-white">
     <h3 class="px-6 py-5 title">List users</h3>
-
+    <div
+      v-if="loading"
+      role="status"
+      class="absolute -translate-x-1/2 -translate-y-1/2 z-20 top-2/4 left-1/2"
+    >
+      <icon-container iconType="icon-loading"></icon-container>
+      <span class="sr-only">Loading...</span>
+    </div>
     <div class="relative table overflow-auto shadow-md sm:rounded-lg">
       <table class="w-full text-sm text-left relative">
-        <div
-          v-if="loading"
-          role="status"
-          class="absolute -translate-x-1/2 -translate-y-1/2 top-2/4 left-1/2"
-        >
-          <icon-container iconType="icon-loading"></icon-container>
-          <span class="sr-only">Loading...</span>
-        </div>
         <thead class="text-xs thead">
           <tr>
             <th scope="col" class="px-6 py-5">ID</th>

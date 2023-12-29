@@ -33,7 +33,7 @@
     <div class="list-users mt-5 flex flex-col bg-white">
       <h3 class="px-6 py-5 title">List products</h3>
 
-      <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+      <div class="relative table overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left relative">
           <div
             v-if="loading"
@@ -169,6 +169,10 @@ export default {
   column-gap: 10px;
   row-gap: 10px;
 }
+.table {
+  display: block;
+  height: 400px;
+}
 .thead {
   background: #eff4fa;
   color: #8f9bb3;
@@ -176,5 +180,7 @@ export default {
   font-style: normal;
   font-weight: 600;
   line-height: 16px;
+  position: sticky;
+  top: 0;
 }
 </style>
