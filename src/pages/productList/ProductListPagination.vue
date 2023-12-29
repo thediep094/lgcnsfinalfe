@@ -14,6 +14,7 @@
         class="input p-0 focus:border-none focus:outline-none"
         placeholder="1"
         min="1"
+        max="10"
         @input="handleSizeInput"
         required
       />

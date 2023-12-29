@@ -8,7 +8,7 @@
   <div class="list-users mt-5 flex flex-col bg-white">
     <h3 class="px-6 py-5 title">List users</h3>
 
-    <div class="relative overflow-auto shadow-md sm:rounded-lg">
+    <div class="relative table overflow-auto shadow-md sm:rounded-lg">
       <table class="w-full text-sm text-left relative">
         <div
           v-if="loading"
@@ -168,7 +168,10 @@ export default {
 .list-users {
   border-radius: 16px;
 }
-
+.table {
+  display: block;
+  height: 417px;
+}
 .thead {
   background: #eff4fa;
   color: #8f9bb3;
@@ -176,6 +179,8 @@ export default {
   font-style: normal;
   font-weight: 600;
   line-height: 16px;
+  position: sticky;
+  top: 0;
 }
 
 .tb-name {

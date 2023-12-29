@@ -1,8 +1,11 @@
 <template>
   <div class="mb-3">
     <label for="id" class="block mb-2 text-sm font-medium text-gray-900"
-      >ID Account</label
-    >
+      >ID Account
+      <guide-input
+        :message="'ID must be at least 4 digits long.'"
+      ></guide-input>
+    </label>
     <input
       type="text"
       id="id"
@@ -118,8 +121,9 @@
   </div>
   <div class="mb-3">
     <label for="name" class="block mb-2 text-sm font-medium text-gray-900"
-      >Name</label
-    >
+      >Name
+      <guide-input :message="'Name just enter letters!'"></guide-input>
+    </label>
     <input
       type="text"
       id="name"
@@ -135,8 +139,9 @@
     <label
       for="mobilePhone"
       class="block mb-2 text-sm font-medium text-gray-900"
-      >Mobile Phone</label
-    >
+      >Mobile Phone
+      <guide-input :message="'Mobile phone just only number!!'"></guide-input>
+    </label>
     <input
       type="text"
       id="mobilePhone"
@@ -166,10 +171,11 @@
 
 <script>
 import IconContainer from "@/components/IconContainer.vue";
-
+import GuideInput from "@/components/GuideInput.vue";
 export default {
   components: {
     IconContainer,
+    GuideInput,
   },
   data() {
     return {
